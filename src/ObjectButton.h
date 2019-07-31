@@ -40,9 +40,11 @@ public:
     void setClickTicks(uint16_t ticks);
 
     // Set number of milliseconds that have to pass by before a press is detected
-    void setLongPressTicks(uint16_t ticks);
+    void setPressTicks(uint16_t ticks);
 
     bool isLongPressed();
+
+    void reset(void);
 
     // Call this function to update state machine for handling button events
     void tick();

@@ -19,8 +19,8 @@
 
 ObjectButton::ObjectButton(uint8_t pin, bool activeLow) {
     m_pin = pin;
-    m_buttonReleased = activeLow ? HIGH : LOW;
     m_buttonPressed = activeLow ? LOW : HIGH;
+    m_buttonReleased = activeLow ? HIGH : LOW;
     pinMode(m_pin, activeLow ? INPUT_PULLUP : INPUT);
 }
 
@@ -51,12 +51,18 @@ void ObjectButton::setClickTicks(uint16_t ticks) {
     m_clickTicks = ticks;
 }
 
-void ObjectButton::setLongPressTicks(uint16_t ticks) {
-    m_longPressTicks = ticks;
+void ObjectButton::setPressTicks(uint16_t ticks) {
+    m_pressTicks = ticks;
 }
 
 bool ObjectButton::isLongPressed() {
     return m_state == State::BUTTON_LONG_PRESSED;
+}
+
+void OneButton::reset(void){
+    m_state = State::BUTTON_NOT_PRESSED; // restart.
+    m_buttonPressedTime = 0L;
+    m_buttonReleasedTime = 0L;
 }
 
 void ObjectButton::tick() {
