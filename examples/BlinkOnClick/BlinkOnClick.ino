@@ -29,6 +29,8 @@ void Blink::onClick(ObjectButton &button) {
 }
 
 void Blink::init() {
+    Serial.begin(9600);
+    pinMode(LED_PIN, OUTPUT);
     button.setDebounceTicks(10);
     button.setOnClickListener(this);
 }
@@ -39,10 +41,7 @@ void Blink::update() {
 
 Blink blink = Blink();
 
-void setup() {
-    Serial.begin(9600);
-  
-    pinMode(LED_PIN, OUTPUT);
+void setup() { 
     blink.init();
 }
 
