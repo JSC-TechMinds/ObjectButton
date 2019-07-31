@@ -3,6 +3,7 @@ compile:
   platforms:
     - uno
     - due
+    - mega2560
     - leonardo
 
 unittest:
@@ -10,4 +11,5 @@ unittest:
   platforms:
     - uno
     - due
+    - mega2560
     - leonardo
