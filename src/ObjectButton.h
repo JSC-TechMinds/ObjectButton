@@ -17,13 +17,14 @@
 #pragma once
 
 #include <inttypes.h>
+#include <Arduino.h>
 #include "interfaces/IOnPressListener.h"
 #include "interfaces/IOnClickListener.h"
 #include "interfaces/IOnDoubleClickListener.h"
 
 class ObjectButton {
 public:
-    ObjectButton(uint8_t pin, bool activeLow = true)
+    ObjectButton(uint8_t pin, bool activeLow = true);
 
     int getId();
 

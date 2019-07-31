@@ -52,14 +52,14 @@ void ObjectButton::setClickTicks(uint16_t ticks) {
 }
 
 void ObjectButton::setPressTicks(uint16_t ticks) {
-    m_pressTicks = ticks;
+    m_longPressTicks = ticks;
 }
 
 bool ObjectButton::isLongPressed() {
     return m_state == State::BUTTON_LONG_PRESSED;
 }
 
-void OneButton::reset(void){
+void ObjectButton::reset(void){
     m_state = State::BUTTON_NOT_PRESSED; // restart.
     m_buttonPressedTime = 0L;
     m_buttonReleasedTime = 0L;

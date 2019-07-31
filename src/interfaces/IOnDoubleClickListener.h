@@ -1,6 +1,6 @@
 #pragma once
 
-class OneButton;
+class ObjectButton;
 
 /**
  * Callback interface for double-click events
@@ -9,6 +9,6 @@ class IOnDoubleClickListener {
 public:
     virtual ~IOnDoubleClickListener() = default;
 
-    virtual void onDoubleClick(OneButton& button) = 0;
+    virtual void onDoubleClick(ObjectButton& button) = 0;
 };
 
