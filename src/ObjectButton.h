@@ -53,16 +53,16 @@ public:
 
     bool isLongPressed();
 
-    void reset(void);
+    void reset();
 
     // Call this function to update state machine for handling button events
     void tick();
 
 private:
-    void notifyOnClick(void);
-    void notifyOnDoubleClick(void);
-    void notifyOnButtonPress(void);
-    void notifyOnButtonRelease(void);
+    void notifyOnClick();
+    void notifyOnDoubleClick();
+    void notifyOnButtonPress();
+    void notifyOnButtonRelease();
 
     IOnClickListener* m_onClickListener = nullptr;
     IOnDoubleClickListener* m_onDoubleClickListener = nullptr;
@@ -73,8 +73,8 @@ private:
     uint16_t m_longPressTicks = DEFAULT_LONG_PRESS_TICKS_MS;
 
     /* Signal levels as read from digitalRead() function, can be either HIGH or LOW */
-    int m_buttonReleased = 0;
     int m_buttonPressed = 0;
+    bool m_isLongButtonPress = false;
 
     /* These variables hold information across the upcoming tick calls.
      * They are initialized once on program start and are updated every
@@ -84,8 +84,6 @@ private:
         BUTTON_NOT_PRESSED,
         BUTTON_PRESSED,
         BUTTON_RELEASED,
-        BUTTON_LONG_PRESSED,
-        BUTTON_CLICKED,
         BUTTON_DOUBLE_CLICKED
     };
 
