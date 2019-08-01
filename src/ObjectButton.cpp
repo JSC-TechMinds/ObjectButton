@@ -52,6 +52,10 @@ void ObjectButton::setPressTicks(uint16_t ticks) {
     m_longPressTicks = ticks;
 }
 
+bool ObjectButton::isPressed() {
+    return digitalRead(m_pin) == m_buttonPressed;
+}
+
 bool ObjectButton::isLongPressed() {
     return m_state == State::BUTTON_LONG_PRESSED;
 }

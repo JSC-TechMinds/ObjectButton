@@ -43,6 +43,8 @@ public:
     // Set number of milliseconds that have to pass by before a press is detected
     void setPressTicks(uint16_t ticks);
 
+    bool isPressed();
+
     bool isLongPressed();
 
     void reset(void);
