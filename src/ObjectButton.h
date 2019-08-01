@@ -22,6 +22,15 @@
 #include "interfaces/IOnClickListener.h"
 #include "interfaces/IOnDoubleClickListener.h"
 
+/* Milliseconds that have to pass by before a click is assumed safe */
+constexpr static int DEFAULT_DEBOUNCE_TICKS_MS = 50;
+
+/* Milliseconds that have to pass by before a click is detected */
+constexpr static int DEFAULT_CLICK_TICKS_MS = 600;
+
+/* Milliseconds that have to pass by before a long button press is detected */
+constexpr static int DEFAULT_LONG_PRESS_TICKS_MS = 1000;
+
 class ObjectButton {
 public:
     ObjectButton(uint8_t pin, bool activeLow = true);
@@ -34,13 +43,10 @@ public:
 
     void setOnPressListener(IOnPressListener* listener);
 
-    // Set number of milliseconds that have to pass by before a click is assumed as safe
     void setDebounceTicks(uint8_t ticks);
 
-    // Set number of milliseconds that have to pass by before a click is detected
     void setClickTicks(uint16_t ticks);
 
-    // Set number of milliseconds that have to pass by before a press is detected
     void setPressTicks(uint16_t ticks);
 
     bool isPressed();
@@ -61,11 +67,10 @@ private:
     IOnClickListener* m_onClickListener = nullptr;
     IOnDoubleClickListener* m_onDoubleClickListener = nullptr;
     IOnPressListener* m_onPressListener = nullptr;
-    int m_buttonId = -1;
-    uint8_t m_pin = 0; // hardware pin number
-    uint8_t m_debounceTicks = 50; // milliseconds that have to pass by before a click is assumed as safe
-    uint16_t m_clickTicks = 600; // milliseconds that have to pass by before a click is detected
-    uint16_t m_longPressTicks = 1000; // milliseconds that have to pass by before a long button press is detected
+    uint8_t m_pin;
+    uint8_t m_debounceTicks = DEFAULT_DEBOUNCE_TICKS_MS;
+    uint16_t m_clickTicks = DEFAULT_CLICK_TICKS_MS;
+    uint16_t m_longPressTicks = DEFAULT_LONG_PRESS_TICKS_MS;
 
     /* Signal levels as read from digitalRead() function, can be either HIGH or LOW */
     int m_buttonReleased = 0;

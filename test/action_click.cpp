@@ -12,36 +12,35 @@ unittest_setup() {
     state->reset();
 }
 
-unittest(properly_detect_button_press_in_active_low_mode) {
-    ObjectButton button = ObjectButton(INPUT_PIN, true);
-
-    // press button
-    state->digitalPin[INPUT_PIN] = LOW;
-
-    assertEqual(true, button.isPressed());
-}
-
-unittest(properly_detect_button_press_in_active_high_mode) {
-    ObjectButton button = ObjectButton(INPUT_PIN, false);
-
-    // press button
-    state->digitalPin[INPUT_PIN] = HIGH;
-
-    assertEqual(true, button.isPressed());
-}
-
 //unittest(receive_on_click_event_after_default_click_ticks) {
-//    GodmodeState* state = GODMODE();
 //    // press button
 //    state->digitalPin[INPUT_PIN] = LOW;
-//    testMock.update();
+//    testMock.getButton().tick();
 //
 //    // release button
 //    state->digitalPin[INPUT_PIN] = HIGH;
-//    state->micros = 601000;
+//    state->micros = DEFAULT_CLICK_TICKS_MS * 1000 + 1;
+//    testMock.getButton().tick();
 //
 //    // validate click event
-//    assertEqual(true, testMock.didReceiveOnCliEvent());
+//    assertEqual(true, testMock.didReceiveOnClickEvent());
+//}
+//
+//unittest(receive_on_click_event_after_custom_click_ticks) {
+//    constexpr static int CLICK_TICKS_MS = 300;
+//    testMock.getButton().setClickTicks(CLICK_TICKS_MS);
+//
+//    // press button
+//    state->digitalPin[INPUT_PIN] = LOW;
+//    testMock.getButton().tick();
+//
+//    // release button
+//    state->digitalPin[INPUT_PIN] = HIGH;
+//    state->micros = CLICK_TICKS_MS * 1000 + 1;
+//    testMock.getButton().tick();
+//
+//    // validate click event
+//    assertEqual(true, testMock.didReceiveOnClickEvent());
 //}
 
 unittest_main()
