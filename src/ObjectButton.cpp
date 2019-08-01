@@ -29,17 +29,14 @@ int ObjectButton::getId() {
 }
 
 void ObjectButton::setOnClickListener(IOnClickListener* listener) {
-    // TODO: Consider implementing multiple listeners to same button
     m_onClickListener = listener;
 }
 
 void ObjectButton::setOnDoubleClickListener(IOnDoubleClickListener* listener) {
-    // TODO: Consider implementing multiple listeners to same button
     m_onDoubleClickListener = listener;
 }
 
 void ObjectButton::setOnPressListener(IOnPressListener *listener) {
-    // TODO: Consider implementing multiple listeners to same button
     m_onPressListener = listener;
 }
 
@@ -87,8 +84,7 @@ void ObjectButton::tick() {
                 if ((now - m_buttonPressedTime) < m_debounceTicks) {
                     m_state = State::BUTTON_NOT_PRESSED;
                 } else {
-                    if (m_onPressListener != nullptr)
-                        m_onPressListener->onRelease(*this);
+                    notifyOnButtonRelease();
 
                     /* FIXME: Disable this code until it is properly tested
                     if ((now - m_buttonPressedTime) > m_clickTicks) {
@@ -107,9 +103,7 @@ void ObjectButton::tick() {
             if (buttonLevel == m_buttonReleased) {
                 m_state = State::BUTTON_NOT_PRESSED;
                 m_buttonReleasedTime = now;
-
-                if (m_onPressListener != nullptr)
-                    m_onPressListener->onRelease(*this);
+                notifyOnButtonRelease();
             }
             break;
         }
@@ -121,10 +115,8 @@ void ObjectButton::tick() {
             break;
         }
         case State::BUTTON_CLICKED: {
-            if (m_onClickListener != nullptr)
-                m_onClickListener->onClick(*this);
-
             m_state = State::BUTTON_NOT_PRESSED;
+            notifyOnDoubleClick();
             break;
         }
         case State::BUTTON_DOUBLE_CLICKED: {
@@ -135,4 +127,24 @@ void ObjectButton::tick() {
             break;
         }
     }
+}
+
+void ObjectButton::notifyOnClick(void) {
+    if (m_onClickListener != nullptr)
+        m_onClickListener->onClick(*this);
+}
+
+void ObjectButton::notifyOnDoubleClick(){
+    if (m_onDoubleClickListener != nullptr)
+        m_onDoubleClickListener->onDoubleClick(*this);
+}
+
+void ObjectButton::notifyOnButtonPress(){
+    if (m_onPressListener != nullptr)
+        m_onPressListener->onPress(*this);
+}
+
+void ObjectButton::notifyOnButtonRelease(){
+    if (m_onPressListener != nullptr)
+        m_onPressListener->onRelease(*this);
 }

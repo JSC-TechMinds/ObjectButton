@@ -51,6 +51,11 @@ public:
     void tick();
 
 private:
+    void notifyOnClick(void);
+    void notifyOnDoubleClick(void);
+    void notifyOnButtonPress(void);
+    void notifyOnButtonRelease(void);
+
     IOnClickListener* m_onClickListener = nullptr;
     IOnDoubleClickListener* m_onDoubleClickListener = nullptr;
     IOnPressListener* m_onPressListener = nullptr;
