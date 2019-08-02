@@ -4,9 +4,9 @@
 #define INPUT_PIN A1
 #define LED_PIN LED_BUILTIN
 
-class BlinkOnClick : private virtual IOnClickListener {
+class ToggleLedOnClick : private virtual IOnClickListener {
 public:
-    BlinkOnClick() = default;
+    ToggleLedOnClick() = default;
 
     void init();
     void update();
@@ -18,7 +18,7 @@ private:
     int ledState = LOW;
 };
 
-void BlinkOnClick::onClick(ObjectButton &button) {
+void ToggleLedOnClick::onClick(ObjectButton &button) {
     if (button.getId() == INPUT_PIN) {
         Serial.println("Button clicked!");
       
@@ -27,23 +27,23 @@ void BlinkOnClick::onClick(ObjectButton &button) {
     }
 }
 
-void BlinkOnClick::init() {
+void ToggleLedOnClick::init() {
     Serial.begin(9600);
     pinMode(LED_PIN, OUTPUT);
     button.setDebounceTicks(10);
     button.setOnClickListener(this);
 }
 
-void BlinkOnClick::update() {
+void ToggleLedOnClick::update() {
     button.tick();
 }
 
-BlinkOnClick blinkOnClick = BlinkOnClick();
+ToggleLedOnClick toggleLedOnClick = ToggleLedOnClick();
 
 void setup() {
-    blinkOnClick.init();
+    toggleLedOnClick.init();
 }
 
 void loop() {
-    blinkOnClick.update();
+    toggleLedOnClick.update();
 }

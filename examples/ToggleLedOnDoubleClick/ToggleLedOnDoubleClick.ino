@@ -4,9 +4,9 @@
 #define INPUT_PIN A1
 #define LED_PIN LED_BUILTIN
 
-class BlinkOnDoubleClick : private virtual IOnDoubleClickListener {
+class ToggleLedOnDoubleClick : private virtual IOnDoubleClickListener {
 public:
-    BlinkOnDoubleClick() = default;
+    ToggleLedOnDoubleClick() = default;
 
     void init();
     void update();
@@ -18,7 +18,7 @@ private:
     int ledState = LOW;
 };
 
-void BlinkOnDoubleClick::onDoubleClick(ObjectButton &button) {
+void ToggleLedOnDoubleClick::onDoubleClick(ObjectButton &button) {
     if (button.getId() == INPUT_PIN) {
         Serial.println("Button double-clicked!");
       
@@ -27,23 +27,23 @@ void BlinkOnDoubleClick::onDoubleClick(ObjectButton &button) {
     }
 }
 
-void BlinkOnDoubleClick::init() {
+void ToggleLedOnDoubleClick::init() {
     Serial.begin(9600);
     pinMode(LED_PIN, OUTPUT);
     button.setDebounceTicks(10);
     button.setOnDoubleClickListener(this);
 }
 
-void BlinkOnDoubleClick::update() {
+void ToggleLedOnDoubleClick::update() {
     button.tick();
 }
 
-BlinkOnDoubleClick blinkOnDoubleClick = BlinkOnDoubleClick();
+ToggleLedOnDoubleClick toggleLedOnDoubleClick = ToggleLedOnDoubleClick();
 
 void setup() {
-    blinkOnDoubleClick.init();
+    toggleLedOnDoubleClick.init();
 }
 
 void loop() {
-    blinkOnDoubleClick.update();
+    toggleLedOnDoubleClick.update();
 }
