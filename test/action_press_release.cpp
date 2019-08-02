@@ -155,4 +155,90 @@ unittest(button_long_press_not_detected_before_default_limit) {
     assertEqual(0, testMock.getLongPressEndEventsReceivedCount());
 }
 
+unittest(button_press_is_notified_only_once_per_action) {
+    // press button
+    state->digitalPin[INPUT_PIN] = LOW;
+    testMock.getButton().tick();
+
+    // fire press event after debounce period elapses
+    state->micros = (DEFAULT_DEBOUNCE_TICKS_MS + 1) * 1000;
+
+    // now, simulate tick() being called periodically in loop(). Make sure notify() gets called only once.
+    testMock.getButton().tick();
+    testMock.getButton().tick();
+    testMock.getButton().tick();
+    testMock.getButton().tick();
+    testMock.getButton().tick();
+
+    // release button
+    state->digitalPin[INPUT_PIN] = HIGH;
+    state->micros = (DEFAULT_CLICK_TICKS_MS - 10) * 1000;
+    testMock.getButton().tick();
+    testMock.getButton().tick();
+
+    // validate click event
+    assertEqual(1, testMock.getPressEventsReceivedCount());
+    assertEqual(1, testMock.getReleaseEventsReceivedCount());
+    assertEqual(0, testMock.getClickEventsReceivedCount());
+    assertEqual(0, testMock.getDoubleClickEventsReceivedCount());
+    assertEqual(0, testMock.getLongPressStartEventsReceivedCount());
+    assertEqual(0, testMock.getLongPressEndEventsReceivedCount());
+}
+
+unittest(receive_long_press_start_and_end_events_when_button_is_held_longer_than_default_long_press_ticks) {
+    // press button
+    state->digitalPin[INPUT_PIN] = LOW;
+    testMock.getButton().tick();
+
+    // fire press event after debounce period elapses
+    state->micros = (DEFAULT_DEBOUNCE_TICKS_MS + 1) * 1000;
+    testMock.getButton().tick();
+
+    // long press
+    state->micros = (DEFAULT_LONG_PRESS_TICKS_MS + 1) * 1000;
+    testMock.getButton().tick();
+
+    // release button
+    state->digitalPin[INPUT_PIN] = HIGH;
+    state->micros = (DEFAULT_LONG_PRESS_TICKS_MS + DEFAULT_DEBOUNCE_TICKS_MS + 1) * 1000;
+    testMock.getButton().tick();
+    testMock.getButton().tick();
+
+    // validate click event
+    assertEqual(1, testMock.getPressEventsReceivedCount());
+    assertEqual(1, testMock.getReleaseEventsReceivedCount());
+    assertEqual(0, testMock.getClickEventsReceivedCount());
+    assertEqual(0, testMock.getDoubleClickEventsReceivedCount());
+    assertEqual(1, testMock.getLongPressStartEventsReceivedCount());
+    assertEqual(1, testMock.getLongPressEndEventsReceivedCount());
+}
+
+unittest(receive_long_press_start_and_end_events_when_button_is_held_longer_than_custom_long_press_ticks) {
+        // press button
+        state->digitalPin[INPUT_PIN] = LOW;
+        testMock.getButton().tick();
+
+        // fire press event after debounce period elapses
+        state->micros = (DEFAULT_DEBOUNCE_TICKS_MS + 1) * 1000;
+        testMock.getButton().tick();
+
+        // long press
+        state->micros = (DEFAULT_LONG_PRESS_TICKS_MS + 1) * 1000;
+        testMock.getButton().tick();
+
+        // release button
+        state->digitalPin[INPUT_PIN] = HIGH;
+        state->micros = (DEFAULT_LONG_PRESS_TICKS_MS + DEFAULT_DEBOUNCE_TICKS_MS + 1) * 1000;
+        testMock.getButton().tick();
+        testMock.getButton().tick();
+
+        // validate click event
+        assertEqual(1, testMock.getPressEventsReceivedCount());
+        assertEqual(1, testMock.getReleaseEventsReceivedCount());
+        assertEqual(0, testMock.getClickEventsReceivedCount());
+        assertEqual(0, testMock.getDoubleClickEventsReceivedCount());
+        assertEqual(1, testMock.getLongPressStartEventsReceivedCount());
+        assertEqual(1, testMock.getLongPressEndEventsReceivedCount());
+}
+
 unittest_main()
