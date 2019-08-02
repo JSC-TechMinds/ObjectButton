@@ -2,7 +2,7 @@
 #include "../src/ObjectButton.h"
 #include "mocks/ListenerMock.h"
 
-constexpr static int INPUT_PIN = 10;
+constexpr static byte INPUT_PIN = 10;
 
 ListenerMock testMock = ListenerMock(INPUT_PIN, true);
 GodmodeState* state = GODMODE();

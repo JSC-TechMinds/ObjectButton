@@ -17,8 +17,8 @@
 #include <ObjectButton.h>
 #include <interfaces/IOnClickListener.h>
 
-constexpr static int INPUT_PIN_BUTTON1 = A1;
-constexpr static int INPUT_PIN_BUTTON2 = A2;
+constexpr static byte INPUT_PIN_BUTTON1 = A1;
+constexpr static byte INPUT_PIN_BUTTON2 = A2;
 
 class TwoButtons : private virtual IOnClickListener,
                    private virtual IOnDoubleClickListener, private virtual IOnPressListener {
@@ -112,7 +112,7 @@ void TwoButtons::onLongPressEnd(ObjectButton &button) {
 }
 
 void TwoButtons::init() {
-    // Setup the Serial port. see http://arduino.cc/en/Serial/IfSerial
+    // Setup the Serial port. See http://arduino.cc/en/Serial/IfSerial
     Serial.begin(9600);
     while (!Serial) {
         ; // wait for serial port to connect. Needed for Leonardo only

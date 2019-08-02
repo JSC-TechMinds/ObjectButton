@@ -15,55 +15,62 @@
  */
 
 #include <ObjectButton.h>
-#include <interfaces/IOnClickListener.h>
+#include <interfaces/IOnDoubleClickListener.h>
 
-constexpr static byte INPUT_PIN = A1;
+constexpr static byte INTERRUPT_PIN = 2;
 constexpr static byte LED_PIN = LED_BUILTIN;
 
-class ToggleLedOnClick : private virtual IOnClickListener {
+class ToggleLedOnDoubleClick : private virtual IOnDoubleClickListener {
 public:
-    ToggleLedOnClick() = default;
+    ToggleLedOnDoubleClick() = default;
 
     void init();
     void update();
 
 private:
-    void onClick(ObjectButton &button) override;
+    void onDoubleClick(ObjectButton &button) override;
 
-    ObjectButton button = ObjectButton(INPUT_PIN, /* activeLow */ true);
-    byte ledState = LOW;
+    ObjectButton button = ObjectButton(INTERRUPT_PIN, /* activeLow */ true);
+    volatile byte ledState = LOW;
 };
 
-void ToggleLedOnClick::onClick(ObjectButton &button) {
-    if (button.getId() == INPUT_PIN) {
-        Serial.println("Button clicked!");
+void ToggleLedOnDoubleClick::onDoubleClick(ObjectButton &button) {
+    if (button.getId() == INTERRUPT_PIN) {
+        Serial.println("Button double-clicked!");
       
         ledState = !ledState;
         digitalWrite(LED_PIN, ledState);
     }
 }
 
-void ToggleLedOnClick::init() {
+void ToggleLedOnDoubleClick::init() {
     // Setup the Serial port. See http://arduino.cc/en/Serial/IfSerial
     Serial.begin(9600);
     while (!Serial) {
         ; // wait for serial port to connect. Needed for Leonardo only
     }
+    pinMode(INTERRUPT_PIN, INPUT_PULLUP);
     pinMode(LED_PIN, OUTPUT);
     button.setDebounceTicks(10);
-    button.setOnClickListener(this);
+    button.setOnDoubleClickListener(this);
 }
 
-void ToggleLedOnClick::update() {
+void ToggleLedOnDoubleClick::update() {
     button.tick();
 }
 
-ToggleLedOnClick toggleLedOnClick = ToggleLedOnClick();
+ToggleLedOnDoubleClick toggleLedOnDoubleClick = ToggleLedOnDoubleClick();
+
+void refreshButton() {
+    toggleLedOnDoubleClick.update();
+}
 
 void setup() {
-    toggleLedOnClick.init();
+    toggleLedOnDoubleClick.init();
+    attachInterrupt(digitalPinToInterrupt(INTERRUPT_PIN), refreshButton, CHANGE);
 }
 
 void loop() {
-    toggleLedOnClick.update();
+    // Do some work
+    delay(10);
 }

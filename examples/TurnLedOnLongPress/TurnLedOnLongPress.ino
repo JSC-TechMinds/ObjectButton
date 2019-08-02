@@ -17,8 +17,8 @@
 #include <ObjectButton.h>
 #include <interfaces/IOnPressListener.h>
 
-constexpr static int INPUT_PIN = A1;
-constexpr static int LED_PIN = LED_BUILTIN;
+constexpr static byte INPUT_PIN = A1;
+constexpr static byte LED_PIN = LED_BUILTIN;
 
 class TurnLedOnLongPress : private virtual IOnPressListener {
 public:
@@ -51,7 +51,7 @@ void TurnLedOnLongPress::onLongPressEnd(ObjectButton &button){
 }
 
 void TurnLedOnLongPress::init() {
-    // Setup the Serial port. see http://arduino.cc/en/Serial/IfSerial
+    // Setup the Serial port. See http://arduino.cc/en/Serial/IfSerial
     Serial.begin(9600);
     while (!Serial) {
         ; // wait for serial port to connect. Needed for Leonardo only
