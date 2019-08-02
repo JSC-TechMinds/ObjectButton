@@ -60,11 +60,15 @@ bool ObjectButton::isLongPressed() {
 }
 
 void ObjectButton::reset() {
-    m_state = State::BUTTON_NOT_PRESSED; // restart.
+    m_state = State::BUTTON_NOT_PRESSED;
     m_isLongButtonPress = false;
     m_buttonPressNotified = false;
     m_buttonPressedTime = 0L;
     m_buttonReleasedTime = 0L;
+
+    m_debounceTicks = DEFAULT_DEBOUNCE_TICKS_MS;
+    m_clickTicks = DEFAULT_CLICK_TICKS_MS;
+    m_longPressTicks = DEFAULT_LONG_PRESS_TICKS_MS;
 }
 
 void ObjectButton::tick() {
