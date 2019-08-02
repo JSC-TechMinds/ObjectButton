@@ -47,7 +47,7 @@ void ObjectButton::setClickTicks(uint16_t ticks) {
     m_clickTicks = ticks;
 }
 
-void ObjectButton::setPressTicks(uint16_t ticks) {
+void ObjectButton::setLongPressTicks(uint16_t ticks) {
     m_longPressTicks = ticks;
 }
 
@@ -62,6 +62,7 @@ bool ObjectButton::isLongPressed() {
 void ObjectButton::reset() {
     m_state = State::BUTTON_NOT_PRESSED; // restart.
     m_isLongButtonPress = false;
+    m_buttonPressNotified = false;
     m_buttonPressedTime = 0L;
     m_buttonReleasedTime = 0L;
 }
@@ -82,15 +83,22 @@ void ObjectButton::tick() {
         }
         case State::BUTTON_PRESSED: {
             if (buttonLevel == m_buttonPressed) {
-                if (timeDelta > m_longPressTicks && !m_isLongButtonPress) {
-                    m_isLongButtonPress = true;
+                if (timeDelta > m_debounceTicks && !m_buttonPressNotified) {
+                    m_buttonPressNotified = true;
                     notifyOnButtonPress();
                 }
+
+                if (timeDelta > m_longPressTicks && !m_isLongButtonPress) {
+                    m_isLongButtonPress = true;
+                    notifyOnLongPressStart();
+                }
             } else {
-                if (timeDelta < m_debounceTicks) {
+                if (timeDelta <= m_debounceTicks) {
                     m_state = State::BUTTON_NOT_PRESSED;
                 } else {
                     m_state = State::BUTTON_RELEASED;
+                    m_buttonPressNotified = false;
+                    notifyOnButtonRelease();
                 }
                 m_buttonReleasedTime = now;
             }
@@ -103,7 +111,7 @@ void ObjectButton::tick() {
             } else if (timeDelta > m_longPressTicks) {
                 m_isLongButtonPress = false;
                 m_state = State::BUTTON_NOT_PRESSED;
-                notifyOnButtonRelease();
+                notifyOnLongPressEnd();
             } else if (buttonLevel == m_buttonPressed && (now - m_buttonReleasedTime) > m_debounceTicks) {
                 m_buttonPressedTime = now;
                 m_state = State::BUTTON_DOUBLE_CLICKED;
@@ -138,4 +146,14 @@ void ObjectButton::notifyOnButtonPress() {
 void ObjectButton::notifyOnButtonRelease() {
     if (m_onPressListener != nullptr)
         m_onPressListener->onRelease(*this);
+}
+
+void ObjectButton::notifyOnLongPressStart(){
+    if (m_onPressListener != nullptr)
+        m_onPressListener->onLongPressStart(*this);
+}
+
+void ObjectButton::notifyOnLongPressEnd(){
+    if (m_onPressListener != nullptr)
+        m_onPressListener->onLongPressEnd(*this);
 }

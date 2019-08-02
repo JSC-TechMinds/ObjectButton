@@ -47,7 +47,7 @@ public:
 
     void setClickTicks(uint16_t ticks);
 
-    void setPressTicks(uint16_t ticks);
+    void setLongPressTicks(uint16_t ticks);
 
     bool isPressed();
 
@@ -63,6 +63,8 @@ private:
     void notifyOnDoubleClick();
     void notifyOnButtonPress();
     void notifyOnButtonRelease();
+    void notifyOnLongPressStart();
+    void notifyOnLongPressEnd();
 
     IOnClickListener* m_onClickListener = nullptr;
     IOnDoubleClickListener* m_onDoubleClickListener = nullptr;
@@ -75,6 +77,7 @@ private:
     /* Signal levels as read from digitalRead() function, can be either HIGH or LOW */
     int m_buttonPressed = 0;
     bool m_isLongButtonPress = false;
+    bool m_buttonPressNotified = false;
 
     /* These variables hold information across the upcoming tick calls.
      * They are initialized once on program start and are updated every

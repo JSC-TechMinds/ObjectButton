@@ -22,75 +22,112 @@
 #include "../src/interfaces/IOnPressListener.h"
 
 class ListenerMock : private virtual IOnClickListener,
-        private virtual IOnDoubleClickListener, private virtual IOnPressListener {
+                     private virtual IOnDoubleClickListener, private virtual IOnPressListener {
 public:
     explicit ListenerMock(int inputPin, bool activeLow);
-    ObjectButton& getButton();
-    bool didReceiveOnClickEvent();
-    bool didReceiveOnDoubleClickEvent();
-    bool didReceiveOnPressEvent();
-    bool didReceiveOnReleaseEvent();
+
+    ObjectButton &getButton();
+
+    int getClickEventsReceivedCount();
+
+    int getDoubleClickEventsReceivedCount();
+
+    int getPressEventsReceivedCount();
+
+    int getReleaseEventsReceivedCount();
+
+    int getLongPressStartEventsReceivedCount();
+
+    int getLongPressEndEventsReceivedCount();
+
     void resetState();
 
 private:
     void onClick(ObjectButton &button) override;
-    void onDoubleClick(ObjectButton& button) override;
-    void onPress(ObjectButton& button) override;
-    void onRelease(ObjectButton& button) override;
+
+    void onDoubleClick(ObjectButton &button) override;
+
+    void onPress(ObjectButton &button) override;
+
+    void onRelease(ObjectButton &button) override;
+
+    void onLongPressStart(ObjectButton &button) override;
+
+    void onLongPressEnd(ObjectButton &button) override;
 
     ObjectButton m_button;
-    bool m_onClickEventReceived = false;
-    bool m_onDoubleClickEventReceived = false;
-    bool m_onPressEventReceived = false;
-    bool m_onReleaseEventReceived = false;
+    int m_onClickEventsReceived = 0;
+    int m_onDoubleClickEventsReceived = 0;
+    int m_onPressEventsReceived = 0;
+    int m_onReleaseEventsReceived = 0;
+    int m_onLongPressStartEventsReceived = 0;
+    int m_onLongPressEndEventsReceived = 0;
 };
 
-ListenerMock::ListenerMock(int inputPin, bool activeLow): m_button(inputPin, activeLow) {
+ListenerMock::ListenerMock(int inputPin, bool activeLow) : m_button(inputPin, activeLow) {
     m_button.setOnClickListener(this);
     m_button.setOnDoubleClickListener(this);
     m_button.setOnPressListener(this);
 }
 
-ObjectButton& ListenerMock::getButton() {
+ObjectButton &ListenerMock::getButton() {
     return m_button;
 }
 
-bool ListenerMock::didReceiveOnClickEvent() {
-    return m_onClickEventReceived;
+int ListenerMock::getClickEventsReceivedCount() {
+    return m_onClickEventsReceived;
 };
 
-bool ListenerMock::didReceiveOnDoubleClickEvent() {
-    return m_onDoubleClickEventReceived;
+int ListenerMock::getDoubleClickEventsReceivedCount() {
+    return m_onDoubleClickEventsReceived;
 };
 
-bool ListenerMock::didReceiveOnPressEvent(){
-    return m_onPressEventReceived;
+int ListenerMock::getPressEventsReceivedCount() {
+    return m_onPressEventsReceived;
 };
 
-bool ListenerMock::didReceiveOnReleaseEvent(){
-    return m_onReleaseEventReceived;
+int ListenerMock::getReleaseEventsReceivedCount() {
+    return m_onReleaseEventsReceived;
+};
+
+int ListenerMock::getLongPressStartEventsReceivedCount() {
+    return m_onLongPressStartEventsReceived;
+};
+
+int ListenerMock::getLongPressEndEventsReceivedCount() {
+    return m_onLongPressEndEventsReceived;
 };
 
 void ListenerMock::resetState() {
     m_button.reset();
-    m_onClickEventReceived = false;
-    m_onDoubleClickEventReceived = false;
-    m_onPressEventReceived = false;
-    m_onReleaseEventReceived = false;
+    m_onClickEventsReceived = 0;
+    m_onDoubleClickEventsReceived = 0;
+    m_onPressEventsReceived = 0;
+    m_onReleaseEventsReceived = 0;
+    m_onLongPressStartEventsReceived = 0;
+    m_onLongPressEndEventsReceived = 0;
 }
 
 void ListenerMock::onClick(ObjectButton &button) {
-    m_onClickEventReceived = true;
+    m_onClickEventsReceived++;
 }
 
 void ListenerMock::onDoubleClick(ObjectButton &button) {
-    m_onDoubleClickEventReceived = true;
+    m_onDoubleClickEventsReceived++;
 }
 
-void ListenerMock::onPress(ObjectButton &button){
-    m_onPressEventReceived = true;
+void ListenerMock::onPress(ObjectButton &button) {
+    m_onPressEventsReceived++;
 }
 
-void ListenerMock::onRelease(ObjectButton &button){
-    m_onReleaseEventReceived = true;
+void ListenerMock::onRelease(ObjectButton &button) {
+    m_onReleaseEventsReceived++;
+}
+
+void ListenerMock::onLongPressStart(ObjectButton &button) {
+    m_onLongPressStartEventsReceived++;
+}
+
+void ListenerMock::onLongPressEnd(ObjectButton &button) {
+    m_onLongPressEndEventsReceived++;
 }

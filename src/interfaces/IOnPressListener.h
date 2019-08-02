@@ -12,5 +12,9 @@ public:
     virtual void onPress(ObjectButton& button) = 0;
 
     virtual void onRelease(ObjectButton& button) = 0;
+
+    virtual void onLongPressStart(ObjectButton& button) = 0;
+
+    virtual void onLongPressEnd(ObjectButton& button) = 0;
 };
 
