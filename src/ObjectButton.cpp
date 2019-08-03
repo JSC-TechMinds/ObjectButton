@@ -112,13 +112,13 @@ void ObjectButton::tick() {
             if (buttonLevel == m_buttonPressed && (now - m_buttonReleasedTime) > m_debounceTicks) {
                 m_buttonPressedTime = now;
                 m_state = State::BUTTON_DOUBLE_CLICKED;
-            } else if (m_clickTicks < timeDelta && timeDelta < m_longPressTicks) {
-                m_state = State::BUTTON_NOT_PRESSED;
-                notifyOnClick();
             } else if (timeDelta > m_longPressTicks) {
                 m_isLongButtonPress = false;
                 m_state = State::BUTTON_NOT_PRESSED;
                 notifyOnLongPressEnd();
+            } else if (timeDelta > m_clickTicks) {
+                m_state = State::BUTTON_NOT_PRESSED;
+                notifyOnClick();
             }
             break;
         }
