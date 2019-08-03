@@ -26,10 +26,10 @@
 constexpr static int DEFAULT_DEBOUNCE_TICKS_MS = 50;
 
 /* Milliseconds that have to pass by before a click is detected */
-constexpr static int DEFAULT_CLICK_TICKS_MS = 600;
+constexpr static int DEFAULT_CLICK_TICKS_MS = 250;
 
 /* Milliseconds that have to pass by before a long button press is detected */
-constexpr static int DEFAULT_LONG_PRESS_TICKS_MS = 1000;
+constexpr static int DEFAULT_LONG_PRESS_TICKS_MS = 500;
 
 class ObjectButton {
 public:
