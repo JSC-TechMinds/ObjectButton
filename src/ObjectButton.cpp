@@ -71,6 +71,11 @@ void ObjectButton::reset() {
     m_longPressTicks = DEFAULT_LONG_PRESS_TICKS_MS;
 }
 
+/**
+ * This method is responsible for updating internal state machine
+ * responsible for handling button events and should be called periodically
+ * in your <code>loop()</code> function.
+ */
 void ObjectButton::tick() {
     // Detect the input information
     int buttonLevel = digitalRead(m_pin); // current button signal

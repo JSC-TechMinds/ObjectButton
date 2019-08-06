@@ -22,17 +22,26 @@
 #include "interfaces/IOnClickListener.h"
 #include "interfaces/IOnDoubleClickListener.h"
 
-/* Milliseconds that have to pass by before a click is assumed safe */
+/** Milliseconds that have to pass by before a button press is assumed safe */
 constexpr static int DEFAULT_DEBOUNCE_TICKS_MS = 50;
 
-/* Milliseconds that have to pass by before a click is detected */
+/** Milliseconds that have to pass by before a click is detected */
 constexpr static int DEFAULT_CLICK_TICKS_MS = 250;
 
-/* Milliseconds that have to pass by before a long button press is detected */
+/** Milliseconds that have to pass by before a long button press is detected */
 constexpr static int DEFAULT_LONG_PRESS_TICKS_MS = 500;
 
+/**
+ * Main component for handling click, double-click and press gestures.
+ */
 class ObjectButton {
 public:
+    /**
+     * @brief Constructor for the class.
+     * @param pin an input pin to use for the button.
+     * @param activeLow determines pin state after button press. Set to <code>true</code> if voltage level
+     * on input pin is <code>LOW</code> after button is pressed. Otherwise set to <code>false</code>.
+     */
     ObjectButton(uint8_t pin, bool activeLow = true);
 
     int getId();
@@ -55,7 +64,6 @@ public:
 
     void reset();
 
-    // Call this function to update state machine for handling button events
     void tick();
 
 private:
@@ -71,16 +79,44 @@ private:
 
     void notifyOnLongPressEnd();
 
+    /**
+     * Pointer to object listening to click events. If event listener is not set,
+     * such event won't be broadcast.
+     *
+     * @see void setOnClickListener(IOnClickListener *listener)
+     */
     IOnClickListener *m_onClickListener = nullptr;
+
+    /**
+     * Pointer to object listening to double-click events. If event listener is not set,
+     * such event won't be broadcast.
+     *
+     * @see void setOnDoubleClickListener(IOnDoubleClickListener *listener)
+     */
     IOnDoubleClickListener *m_onDoubleClickListener = nullptr;
+
+    /**
+     * Pointer to object listening to press, release and long-press events.
+     * If event listener is not set, such event won't be broadcast.
+     *
+     * @see void setOnPressListener(IOnPressListener *listener)
+     */
     IOnPressListener *m_onPressListener = nullptr;
-    uint8_t m_pin;
-    uint8_t m_debounceTicks = DEFAULT_DEBOUNCE_TICKS_MS;
-    uint16_t m_clickTicks = DEFAULT_CLICK_TICKS_MS;
-    uint16_t m_longPressTicks = DEFAULT_LONG_PRESS_TICKS_MS;
+
+    uint8_t m_pin; /**< Input pin bound with this button instance */
+
+    /*
+     * Following variables are used to define time constraints necessary to properly detect events.
+     * These values can be overridden using dedicated methods.
+     */
+    uint8_t m_debounceTicks = DEFAULT_DEBOUNCE_TICKS_MS; /**< Sets debounce time to default [milliseconds] */
+    uint16_t m_clickTicks = DEFAULT_CLICK_TICKS_MS; /**< Sets time to detect click event to default [milliseconds] */
+    uint16_t m_longPressTicks = DEFAULT_LONG_PRESS_TICKS_MS; /**< Sets time to detect long press event to default [milliseconds] */
 
     /* Signal levels as read from digitalRead() function, can be either HIGH or LOW */
-    int m_buttonPressed = 0;
+    byte m_buttonPressed;
+
+
     bool m_isLongButtonPress = false;
     bool m_buttonPressNotified = false;
 
