@@ -27,11 +27,11 @@ int ObjectButton::getId() {
     return m_pin;
 }
 
-void ObjectButton::setOnClickListener(IOnClickListener* listener) {
+void ObjectButton::setOnClickListener(IOnClickListener *listener) {
     m_onClickListener = listener;
 }
 
-void ObjectButton::setOnDoubleClickListener(IOnDoubleClickListener* listener) {
+void ObjectButton::setOnDoubleClickListener(IOnDoubleClickListener *listener) {
     m_onDoubleClickListener = listener;
 }
 
@@ -152,12 +152,12 @@ void ObjectButton::notifyOnButtonRelease() {
         m_onPressListener->onRelease(*this);
 }
 
-void ObjectButton::notifyOnLongPressStart(){
+void ObjectButton::notifyOnLongPressStart() {
     if (m_onPressListener != nullptr)
         m_onPressListener->onLongPressStart(*this);
 }
 
-void ObjectButton::notifyOnLongPressEnd(){
+void ObjectButton::notifyOnLongPressEnd() {
     if (m_onPressListener != nullptr)
         m_onPressListener->onLongPressEnd(*this);
 }

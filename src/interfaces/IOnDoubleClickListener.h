@@ -25,6 +25,6 @@ class IOnDoubleClickListener {
 public:
     virtual ~IOnDoubleClickListener() = default;
 
-    virtual void onDoubleClick(ObjectButton& button) = 0;
+    virtual void onDoubleClick(ObjectButton &button) = 0;
 };
 

@@ -37,11 +37,11 @@ public:
 
     int getId();
 
-    void setOnClickListener(IOnClickListener* listener);
+    void setOnClickListener(IOnClickListener *listener);
 
-    void setOnDoubleClickListener(IOnDoubleClickListener* listener);
+    void setOnDoubleClickListener(IOnDoubleClickListener *listener);
 
-    void setOnPressListener(IOnPressListener* listener);
+    void setOnPressListener(IOnPressListener *listener);
 
     void setDebounceTicks(uint8_t ticks);
 
@@ -60,15 +60,20 @@ public:
 
 private:
     void notifyOnClick();
+
     void notifyOnDoubleClick();
+
     void notifyOnButtonPress();
+
     void notifyOnButtonRelease();
+
     void notifyOnLongPressStart();
+
     void notifyOnLongPressEnd();
 
-    IOnClickListener* m_onClickListener = nullptr;
-    IOnDoubleClickListener* m_onDoubleClickListener = nullptr;
-    IOnPressListener* m_onPressListener = nullptr;
+    IOnClickListener *m_onClickListener = nullptr;
+    IOnDoubleClickListener *m_onDoubleClickListener = nullptr;
+    IOnPressListener *m_onPressListener = nullptr;
     uint8_t m_pin;
     uint8_t m_debounceTicks = DEFAULT_DEBOUNCE_TICKS_MS;
     uint16_t m_clickTicks = DEFAULT_CLICK_TICKS_MS;

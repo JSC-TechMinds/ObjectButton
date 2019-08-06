@@ -25,6 +25,6 @@ class IOnClickListener {
 public:
     virtual ~IOnClickListener() = default;
 
-    virtual void onClick(ObjectButton& button) = 0;
+    virtual void onClick(ObjectButton &button) = 0;
 };
 

@@ -25,25 +25,29 @@ public:
     TurnLedOnLongPress() = default;
 
     void init();
+
     void update();
 
 private:
-    void onPress(ObjectButton& button) override {};
-    void onRelease(ObjectButton& button) override {};
-    void onLongPressStart(ObjectButton& button) override;
-    void onLongPressEnd(ObjectButton& button) override;
+    void onPress(ObjectButton &button) override {};
+
+    void onRelease(ObjectButton &button) override {};
+
+    void onLongPressStart(ObjectButton &button) override;
+
+    void onLongPressEnd(ObjectButton &button) override;
 
     ObjectButton button = ObjectButton(INPUT_PIN, /* activeLow */ true);
 };
 
-void TurnLedOnLongPress::onLongPressStart(ObjectButton &button){
+void TurnLedOnLongPress::onLongPressStart(ObjectButton &button) {
     if (button.getId() == INPUT_PIN) {
         Serial.println("Button long press started, turning LED on!");
         digitalWrite(LED_PIN, HIGH);
     }
 }
 
-void TurnLedOnLongPress::onLongPressEnd(ObjectButton &button){
+void TurnLedOnLongPress::onLongPressEnd(ObjectButton &button) {
     if (button.getId() == INPUT_PIN) {
         Serial.println("Button long press ended, turning LED off!");
         digitalWrite(LED_PIN, LOW);
@@ -53,8 +57,7 @@ void TurnLedOnLongPress::onLongPressEnd(ObjectButton &button){
 void TurnLedOnLongPress::init() {
     // Setup the Serial port. See http://arduino.cc/en/Serial/IfSerial
     Serial.begin(9600);
-    while (!Serial) {
-        ; // wait for serial port to connect. Needed for Leonardo only
+    while (!Serial) { ; // wait for serial port to connect. Needed for Leonardo only
     }
     pinMode(LED_PIN, OUTPUT);
     button.setDebounceTicks(10);
