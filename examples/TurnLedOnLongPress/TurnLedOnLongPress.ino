@@ -1,4 +1,9 @@
 /**
+ * @brief Single button, long press example.
+ *
+ * This sketch demonstrates using ObjectButton library with single button,
+ * which will turn built-in LED on when it's long pressed.
+ *
  * Copyright 2019 JSC electronics
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -37,7 +42,7 @@ private:
 
     void onLongPressEnd(ObjectButton &button) override;
 
-    ObjectButton button = ObjectButton(INPUT_PIN, /* activeLow */ true);
+    ObjectButton button = ObjectButton(INPUT_PIN);
 };
 
 void TurnLedOnLongPress::onLongPressStart(ObjectButton &button) {

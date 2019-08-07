@@ -1,4 +1,11 @@
 /**
+ * @brief Two distinct buttons example.
+ *
+ * This sketch demonstrates using ObjectButton library with two distinct buttons.
+ *
+ * In this example we receive all events produced by buttons and print
+ * which event occurred on which button to the serial monitor.
+ *
  * Copyright 2019 JSC electronics
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -42,8 +49,8 @@ private:
 
     void onLongPressEnd(ObjectButton &button) override;
 
-    ObjectButton button1 = ObjectButton(INPUT_PIN_BUTTON1, /* activeLow */ true);
-    ObjectButton button2 = ObjectButton(INPUT_PIN_BUTTON2, /* activeLow */ true);
+    ObjectButton button1 = ObjectButton(INPUT_PIN_BUTTON1);
+    ObjectButton button2 = ObjectButton(INPUT_PIN_BUTTON2);
 };
 
 void TwoButtons::onClick(ObjectButton &button) {

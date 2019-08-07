@@ -1,4 +1,9 @@
 /**
+ * @brief Single button, click example.
+ *
+ * This sketch demonstrates using ObjectButton library with single button,
+ * which will turn built-in LED on or off after being clicked.
+ *
  * Copyright 2019 JSC electronics
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -31,7 +36,7 @@ public:
 private:
     void onClick(ObjectButton &button) override;
 
-    ObjectButton button = ObjectButton(INPUT_PIN, /* activeLow */ true);
+    ObjectButton button = ObjectButton(INPUT_PIN);
     byte ledState = LOW;
 };
 
