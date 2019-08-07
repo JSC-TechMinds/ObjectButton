@@ -1,5 +1,13 @@
 /**
- * Copyright 2019 JSC electronics
+ *  @file       ObjectButton.h
+ *  Project     ObjectButton
+ *  @brief      An Arduino library for processing GPIO inputs as button actions
+ *  @author     Vladimír Záhradník
+ *  @license    Apache-2.0 - Copyright (c) 2019 JSC electronics
+ *
+ *  @section license License
+ *
+ *  Copyright (c) 2019 JSC electronics
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -36,12 +44,6 @@ constexpr static int DEFAULT_LONG_PRESS_TICKS_MS = 500;
  */
 class ObjectButton {
 public:
-    /**
-     * @brief Constructor for the class.
-     * @param pin an input pin to use for the button.
-     * @param activeLow determines pin state after button press. Set to <code>true</code> if voltage level
-     * on input pin is <code>LOW</code> after button is pressed. Otherwise set to <code>false</code>.
-     */
     ObjectButton(uint8_t pin, bool activeLow = true);
 
     int getId();
@@ -113,16 +115,34 @@ private:
     uint16_t m_clickTicks = DEFAULT_CLICK_TICKS_MS; /**< Sets time to detect click event to default [milliseconds] */
     uint16_t m_longPressTicks = DEFAULT_LONG_PRESS_TICKS_MS; /**< Sets time to detect long press event to default [milliseconds] */
 
-    /* Signal levels as read from digitalRead() function, can be either HIGH or LOW */
+    /**
+     * Signal levels as read from <code>digitalRead()</code> function, can be either <code>HIGH</code> or
+     * <code>LOW</code>. When you create a new button instance, you specify <code>activeLow</code> boolean parameter.
+     * This variable represents a mapping from the boolean to actual value expected on input pin.
+     *
+     * @see ObjectButton(uint8_t pin, bool activeLow = true)
+     */
     byte m_buttonPressed;
 
-
+    /**
+     * After you press a button for longer than <code>longPressTicks</code>, a button is considered long pressed.
+     * Our state machine does not have separate long press state. Instead it just sets this flag to <code>true</code>.
+     *
+     * @see m_longPressTicks
+     * @see bool isLongPressed()
+     */
     bool m_isLongButtonPress = false;
+
+    /**
+     * This flag helps us determine if an <code>onPress</code> event was already sent. It is necessary
+     * to avoid sending this event each time our state machine's <code>tick()</code> method is called.
+     *
+     * @see void tick()
+     */
     bool m_buttonPressNotified = false;
 
-    /* These variables hold information across the upcoming tick calls.
-     * They are initialized once on program start and are updated every
-     * time the tick function is called.
+    /**
+     * @brief States into which our state machine could transition into.
      */
     enum class State {
         BUTTON_NOT_PRESSED,
@@ -131,11 +151,13 @@ private:
         BUTTON_DOUBLE_CLICKED
     };
 
+    /**
+     * This variable holds current state of our state machine. By default it's "button not pressed".
+     *
+     * @see enum class State
+     */
     State m_state = State::BUTTON_NOT_PRESSED;
 
-    unsigned long m_buttonPressedTime = 0L;
-    unsigned long m_buttonReleasedTime = 0L;
+    unsigned long m_buttonPressedTime = 0L; /**< Captures timestamp when the button was pressed [milliseconds] */
+    unsigned long m_buttonReleasedTime = 0L; /**< Captures timestamp when the button was released [milliseconds] */
 };
-
-
-
