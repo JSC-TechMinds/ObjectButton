@@ -1,5 +1,11 @@
 /**
- * Copyright 2019 JSC electronics
+ *  @file       ListenerMock.h
+ *  Project     ObjectButton
+ *  @brief      An Arduino library for processing GPIO inputs as button actions
+ *  @author     Vladimír Záhradník
+ *  License     Apache-2.0 - Copyright (c) 2019 JSC electronics
+ *
+ *  Copyright (c) 2019 JSC electronics
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,25 +27,74 @@
 #include "../src/interfaces/IOnDoubleClickListener.h"
 #include "../src/interfaces/IOnPressListener.h"
 
+/**
+ * @brief Helper class used in unit tests.
+ *
+ * Purpose of this class is to serve as a listener for all button events and count all
+ * button events as they happen. In our unit tests we can check if a specific
+ * event occurred and compare counted occurrences with expected value.
+ */
 class ListenerMock : private virtual IOnClickListener,
                      private virtual IOnDoubleClickListener, private virtual IOnPressListener {
 public:
+    /**
+     * Constructor
+     * @param inputPin is a pin to which a button is attached. In this case a pin is mocked and controlled by a test.
+     * @param activeLow passes activeLow value to ObjectButton constructor
+     *
+     * @see ObjectButton(uint8_t pin, bool activeLow = true)
+     */
     explicit ListenerMock(int inputPin, bool activeLow);
 
+    /**
+     * @brief Get reference to button created inside this mock.
+     *
+     * Getting a reference to the internal button allows us to have full control
+     * over behavior, which is very important in a test. With this approach we do not need to create
+     * custom methods, which call button methods. Instead we call button methods directly.
+     * @return a reference to internal button instance inside the mock.
+     */
     ObjectButton &getButton();
 
+    /**
+     * @brief Get number of click events which occurred since this mock was reset.
+     * @return a number of click events.
+     */
     int getClickEventsReceivedCount();
 
+    /**
+     * @brief Get number of double-click events which occurred since this mock was reset.
+     * @return a number of double-click events.
+     */
     int getDoubleClickEventsReceivedCount();
 
+    /**
+     * @brief Get number of press events which occurred since this mock was reset.
+     * @return a number of press events.
+     */
     int getPressEventsReceivedCount();
 
+    /**
+     * @brief Get number of release events which occurred since this mock was reset.
+     * @return a number of release events.
+     */
     int getReleaseEventsReceivedCount();
 
+    /**
+     * @brief Get number of long press start events which occurred since this mock was reset.
+     * @return a number of long press start events.
+     */
     int getLongPressStartEventsReceivedCount();
 
+    /**
+     * @brief Get number of long press end events which occurred since this mock was reset.
+     * @return a number of long press end events.
+     */
     int getLongPressEndEventsReceivedCount();
 
+    /**
+     * @brief Reset this mock listener to default state, including counters.
+     */
     void resetState();
 
 private:

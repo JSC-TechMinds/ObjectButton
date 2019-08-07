@@ -3,9 +3,9 @@
  *  Project     ObjectButton
  *  @brief      An Arduino library for processing GPIO inputs as button actions
  *  @author     Vladimír Záhradník
- *  @license    Apache-2.0 - Copyright (c) 2019 JSC electronics
+ *  License     Apache-2.0 - Copyright (c) 2019 JSC electronics
  *
- *  @section license License
+ *  @section License
  *
  *  Copyright (c) 2019 JSC electronics
  *
@@ -85,7 +85,7 @@ private:
      * Pointer to object listening to click events. If event listener is not set,
      * such event won't be broadcast.
      *
-     * @see void setOnClickListener(IOnClickListener *listener)
+     * @see setOnClickListener(IOnClickListener *listener)
      */
     IOnClickListener *m_onClickListener = nullptr;
 
@@ -93,7 +93,7 @@ private:
      * Pointer to object listening to double-click events. If event listener is not set,
      * such event won't be broadcast.
      *
-     * @see void setOnDoubleClickListener(IOnDoubleClickListener *listener)
+     * @see setOnDoubleClickListener(IOnDoubleClickListener *listener)
      */
     IOnDoubleClickListener *m_onDoubleClickListener = nullptr;
 
@@ -101,7 +101,7 @@ private:
      * Pointer to object listening to press, release and long-press events.
      * If event listener is not set, such event won't be broadcast.
      *
-     * @see void setOnPressListener(IOnPressListener *listener)
+     * @see setOnPressListener(IOnPressListener *listener)
      */
     IOnPressListener *m_onPressListener = nullptr;
 
@@ -128,8 +128,8 @@ private:
      * After you press a button for longer than <code>longPressTicks</code>, a button is considered long pressed.
      * Our state machine does not have separate long press state. Instead it just sets this flag to <code>true</code>.
      *
-     * @see m_longPressTicks
-     * @see bool isLongPressed()
+     * @see ObjectButton::m_longPressTicks
+     * @see isLongPressed()
      */
     bool m_isLongButtonPress = false;
 
@@ -137,7 +137,7 @@ private:
      * This flag helps us determine if an <code>onPress</code> event was already sent. It is necessary
      * to avoid sending this event each time our state machine's <code>tick()</code> method is called.
      *
-     * @see void tick()
+     * @see tick()
      */
     bool m_buttonPressNotified = false;
 

@@ -3,9 +3,7 @@
  *  Project     ObjectButton
  *  @brief      An Arduino library for processing GPIO inputs as button actions
  *  @author     Vladimír Záhradník
- *  @license    Apache-2.0 - Copyright (c) 2019 JSC electronics
- *
- *  @section license License
+ *  License     Apache-2.0 - Copyright (c) 2019 JSC electronics
  *
  *  Copyright (c) 2019 JSC electronics
  *
@@ -30,6 +28,7 @@
  * @param pin an input pin to use for the button.
  * @param activeLow determines pin state after button press. Set to <code>true</code> if voltage level
  * on input pin is <code>LOW</code> after button is pressed. Otherwise set to <code>false</code>.
+ * This parameter is optional and defaults to <code>true</code>.
  */
 ObjectButton::ObjectButton(uint8_t pin, bool activeLow) {
     m_pin = pin;
@@ -55,12 +54,12 @@ int ObjectButton::getId() {
  *
  * This listener gets notified each time a button is clicked. A click gesture
  * occurs when a button is pressed and released once within <code>m_clickTicks</code> period.
- * Until this period elapses, we cannot tell that click event occurred, because user could
+ * Until this period elapses, we cannot tell that click event has occurred, because user could
  * still perform a double-click gesture.
  *
- * In cases where you work on a project requiring event notifications as soon as they happen,
+ * In cases where you work on a project requiring notifications on events as soon as they happen,
  * we do recommend to handle <code>onPress</code> and <code>onRelease</code> events defined
- * in <code>IOnPressListener</code>. These events fire almost immediately (after debounce time elapses).
+ * in <code>IOnPressListener</code> instead. These events fire almost immediately (after debounce time has elapsed).
  *
  * Button press and release should not occur sooner than defined in <code>m_debounceTicks</code>. This would
  * signal random signal changes on input pin, not an user action.
@@ -69,7 +68,7 @@ int ObjectButton::getId() {
  * @param listener object implementing <code>IOnClickListener</code> interface.
  *
  * @see IOnClickListener.h
- * @see void setDebounceTicks(uint8_t ticks)
+ * @see setDebounceTicks(uint8_t ticks)
  */
 void ObjectButton::setOnClickListener(IOnClickListener *listener) {
     m_onClickListener = listener;
@@ -83,13 +82,13 @@ void ObjectButton::setOnClickListener(IOnClickListener *listener) {
  * which does not exceed <code>m_clickTicks</code>.
  *
  * Button press and release should not occur sooner than defined in <code>m_debounceTicks</code>. This would
- * signal random signal changes on input pin, not an user action.
+ * signal random signal changes on input pin, not a user action.
  *
  * @param listener object implementing <code>IOnDoubleClickListener</code> interface.
  *
  * @see IOnDoubleClickListener.h
- * @see uint16_t m_clickTicks
- * @see void setDebounceTicks(uint8_t ticks)
+ * @see ObjectButton#m_clickTicks
+ * @see setDebounceTicks(uint8_t ticks)
  */
 void ObjectButton::setOnDoubleClickListener(IOnDoubleClickListener *listener) {
     m_onDoubleClickListener = listener;
@@ -99,21 +98,20 @@ void ObjectButton::setOnDoubleClickListener(IOnDoubleClickListener *listener) {
  * @brief Set a listener to receive event on button press and release.
  *
  * This listener gets notified on each button press and release. Additionally it gets notified that
- * a button was long pressed and released afterwards. After which time is a press declared as a long press
+ * a button was long pressed and released afterwards. Time after which a button press is declared as a long press
  * is user-configurable.
  *
  * <code>onPress</code> and <code>onRelease</code> events fire almost immediately (after debounce time elapses)
  * and are suitable for use cases where you need to get event notification as soon as an event occurs.
  *
  * Button press and release should not occur sooner than defined in <code>m_debounceTicks</code>. This would
- * signal random signal changes on input pin, not an user action.
- *
+ * signal random signal changes on input pin, not a user action.
  *
  * @param listener object implementing <code>IOnPressListener</code> interface.
  *
  * @see IOnPressListener.h
- * @see uint16_t m_longPressTicks
- * @see void setDebounceTicks(uint8_t ticks)
+ * @see ObjectButton#m_longPressTicks
+ * @see setDebounceTicks(uint8_t ticks)
  */
 void ObjectButton::setOnPressListener(IOnPressListener *listener) {
     m_onPressListener = listener;
