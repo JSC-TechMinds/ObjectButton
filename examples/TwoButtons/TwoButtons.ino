@@ -23,6 +23,8 @@
 
 #include <ObjectButton.h>
 #include <interfaces/IOnClickListener.h>
+#include <interfaces/IOnDoubleClickListener.h>
+#include <interfaces/IOnPressListener.h>
 
 constexpr static byte INPUT_PIN_BUTTON1 = A1;
 constexpr static byte INPUT_PIN_BUTTON2 = A2;

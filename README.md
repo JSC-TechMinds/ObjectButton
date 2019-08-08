@@ -12,7 +12,7 @@ To sum up:
 - If you have more buttons, neccesity to map actions to different functions
 
 ### Listeners
-Approach used in this library was inspired by [Android][android-listener]. Instead of passing function callback, you'll implement listeners inside your class and pass a reference to your object. Our library can call all the methods defined in the listener, no need to pass callbacks to individual methods anymore! Also, each callback method has one input parameter - a reference to `ObjectButton` instance. This way we can differentiate, which button produced an event and have code for all the buttons in one place.
+Approach used in this library was inspired by [Android][android-listener]. Instead of passing a function callback, you'll implement listeners inside your class and pass a reference to your object. Our library can call all the methods defined in the listener, no need to pass callbacks to individual methods anymore! Also, each callback method has one input parameter - a reference to `ObjectButton` instance. This way we can differentiate, which button produced an event and have code for all the buttons in one place.
 
 Supported listeners:
 - [IOnClickListener](src/interfaces/IOnClickListener.h)
@@ -31,7 +31,7 @@ At the moment, following actions are detected:
 - Button release after a long press
 
 ### Tweaking action recognition
-This library comes with reasonable defaults for detecting all the actions. However, you can tweak the values to better fit your project. First, create a new `ObjectButton` instance. Then call one of these methods:
+This library comes with reasonable defaults for detecting all the actions. However, you can tweak the values to better fit your project. First, create a new `ObjectButton` instance. Then, call one of these methods:
 - `setDebounceTicks()` to adjust the debounce interval for more reliable pattern recognition
 - `setClickTicks()` to adjust the time to detect a click action
 - `setLongPressTicks()` to adjust the time to detect a long press action
@@ -39,6 +39,7 @@ This library comes with reasonable defaults for detecting all the actions. Howev
 ## Documentation
 - [GitHub Wiki][object-button-wiki]
 - [Extended Doxygen Documentation][object-button-doxygen]
+- [Examples](examples)
 
 ## License
 
