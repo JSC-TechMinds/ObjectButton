@@ -59,15 +59,16 @@ int ObjectButton::getId() {
  *
  * In cases where you work on a project requiring notifications on events as soon as they happen,
  * we do recommend to handle <code>onPress</code> and <code>onRelease</code> events defined
- * in <code>IOnPressListener</code> instead. These events fire almost immediately (after debounce time has elapsed).
+ * in IOnPressListener instead. These events fire almost immediately (after debounce time has elapsed).
  *
  * Button press and release should not occur sooner than defined in <code>m_debounceTicks</code>. This would
  * signal random signal changes on input pin, not an user action.
  *
  *
- * @param listener object implementing <code>IOnClickListener</code> interface.
+ * @param listener object implementing IOnClickListener interface.
  *
  * @see IOnClickListener.h
+ * @see IOnPressListener.h
  * @see setDebounceTicks(uint8_t ticks)
  */
 void ObjectButton::setOnClickListener(IOnClickListener *listener) {
@@ -84,7 +85,7 @@ void ObjectButton::setOnClickListener(IOnClickListener *listener) {
  * Button press and release should not occur sooner than defined in <code>m_debounceTicks</code>. This would
  * signal random signal changes on input pin, not a user action.
  *
- * @param listener object implementing <code>IOnDoubleClickListener</code> interface.
+ * @param listener object implementing IOnDoubleClickListener interface.
  *
  * @see IOnDoubleClickListener.h
  * @see ObjectButton#m_clickTicks
@@ -107,7 +108,7 @@ void ObjectButton::setOnDoubleClickListener(IOnDoubleClickListener *listener) {
  * Button press and release should not occur sooner than defined in <code>m_debounceTicks</code>. This would
  * signal random signal changes on input pin, not a user action.
  *
- * @param listener object implementing <code>IOnPressListener</code> interface.
+ * @param listener object implementing IOnPressListener interface.
  *
  * @see IOnPressListener.h
  * @see ObjectButton#m_longPressTicks
@@ -123,7 +124,7 @@ void ObjectButton::setOnPressListener(IOnPressListener *listener) {
  * To prevent random signal changes on input pin to trigger an event, we define a debounce interval.
  * Only when the button is pressed for longer than debounce, it is assumed to be a user action.
  *
- * Default value is defined in <code>DEFAULT_DEBOUNCE_TICKS_MS</code>.
+ * Default value is defined in #DEFAULT_DEBOUNCE_TICKS_MS.
  *
  * @param ticks a debounce time interval in milliseconds.
  */
@@ -135,7 +136,7 @@ void ObjectButton::setDebounceTicks(uint8_t ticks) {
  * @brief Set time interval to detect a click event.
  *
  * Sets a time interval, after which it is safe to assume that a click event has occurred.
- * Default value is defined in <code>DEFAULT_CLICK_TICKS_MS</code>.
+ * Default value is defined in #DEFAULT_CLICK_TICKS_MS.
  *
  * @param ticks a click time interval in milliseconds.
  */
@@ -147,7 +148,7 @@ void ObjectButton::setClickTicks(uint16_t ticks) {
  * @brief Set time interval to detect a long press event.
  *
  * Sets a time interval, after which it is safe to assume that a long press event has occurred.
- * Default value is defined in <code>DEFAULT_LONG_PRESS_TICKS_MS</code>.
+ * Default value is defined in #DEFAULT_LONG_PRESS_TICKS_MS.
  *
  * @param ticks a long press time interval in milliseconds.
  */

@@ -6,7 +6,9 @@
  * - Toggle built-in LED blinking between steady, slow and fast state with a double click gesture.
  *
  * This example is heavily inspired by a sketch from OneButton library:
+ *
  * https://github.com/mathertel/OneButton/blob/master/examples/BlinkMachine/BlinkMachine.ino
+ *
  * See their sketch for more details on internal workings, if it's not clear for your from this code.
  *
  * Copyright 2019 JSC electronics
