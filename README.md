@@ -43,6 +43,15 @@ This library comes with reasonable defaults for detecting all the actions. Howev
 - [Extended Doxygen Documentation][object-button-doxygen]
 - [Examples](examples)
 
+## Contributing
+There are many ways in which you can participate in the project, for example:
+
+* [Submit bugs and feature requests](https://github.com/JSC-electronics/ObjectButton/issues), and help us verify as they are checked in
+* Review [source code changes](https://github.com/JSC-electronics/ObjectButton/pulls)
+* Review the [documentation](https://github.com/JSC-electronics/ObjectButton/wiki) and make pull requests for anything from typos to new content
+
+Please read [contributing rules](CONTRIBUTING.md) for more details.
+
 ## License
 
 Copyright (c) JSC electronics. All rights reserved.
