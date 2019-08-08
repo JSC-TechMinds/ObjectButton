@@ -1,0 +1,42 @@
+#######################################
+# Syntax Coloring Map for ObjectButton
+#######################################
+
+
+#######################################
+# Datatypes (KEYWORD1)
+#######################################
+
+IOnClickListener	KEYWORD1
+IOnDoubleClickListener	KEYWORD1
+IOnPressListener	KEYWORD1
+
+#######################################
+# Methods and Functions (KEYWORD2)
+#######################################
+
+getId	KEYWORD2
+setOnClickListener	KEYWORD2
+setOnDoubleClickListener	KEYWORD2
+setOnPressListener	KEYWORD2
+setDebounceTicks	KEYWORD2
+setClickTicks	KEYWORD2
+setLongPressTicks	KEYWORD2
+isPressed	KEYWORD2
+isLongPressed	KEYWORD2
+reset	KEYWORD2
+tick	KEYWORD2
+
+#######################################
+# Instances (KEYWORD2)
+#######################################
+
+ObjectButton	KEYWORD2
+
+#######################################
+# Constants (LITERAL1)
+#######################################
+
+DEFAULT_DEBOUNCE_TICKS_MS	LITERAL1
+DEFAULT_CLICK_TICKS_MS	LITERAL1
+DEFAULT_LONG_PRESS_TICKS_MS	LITERAL1
