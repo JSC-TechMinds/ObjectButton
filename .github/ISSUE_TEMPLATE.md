@@ -42,7 +42,8 @@ You may delete the guideline and text above to just leave the following details:
 - Arduino IDE version (found in Arduino -> About Arduino menu):  **INSERT ARDUINO
   VERSION HERE**
 
-- PlatformIO Core version, if you use PlatformIO (found in VS Code tab)
+- PlatformIO Core version, if you use PlatformIO (found in VS Code tab): **INSERT
+  PLATFORMIO CORE VERSION HERE**
 
 - List the steps to reproduce the problem below (if possible attach a sketch or
   copy the sketch code in too): **LIST REPRO STEPS BELOW**
