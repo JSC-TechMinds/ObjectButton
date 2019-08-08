@@ -1,7 +1,7 @@
 /**
  *  @file       IOnPressListener.h
  *  Project     ObjectButton
- *  @brief      An Arduino library for processing GPIO inputs as button actions
+ *  @brief      An Arduino library for detecting button actions.
  *  @author     Vladimír Záhradník
  *  License     Apache-2.0 - Copyright (c) 2019 JSC electronics
  *
