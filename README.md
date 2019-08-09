@@ -6,7 +6,7 @@
 ObjectButton is an Arduino library for detecting common button actions. Because of it, you can map different functions into a single button, i.e. turn on the light on a button click and play an alarm sound on double-click.
 
 ## Rationale
-This library was inspired by an existing Arduino library, [OneButton][OneButton]. It allow you to attach a callback function to a specific action. This callback function is basically a pointer to a function. Following approach works great for C-like functions, but not for [C++ methods inside objects][so-object-member]. Also, if your function gets called, it has no idea, which button called it.
+This library was inspired by an existing Arduino library, [OneButton][OneButton]. It allows you to attach a callback function to a specific action. This callback function is basically a pointer to a function. Following approach works great for C-like functions, but not for [C++ methods inside objects][so-object-member]. Also, if your function gets called, it has no idea, which button called it.
 
 To sum up:
 - Only C-like functions can be called back
