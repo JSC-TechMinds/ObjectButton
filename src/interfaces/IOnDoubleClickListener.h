@@ -28,7 +28,7 @@ class ObjectButton;
  * @brief Callback interface for double-click events.
  *
  * Each object passed to ObjectButton instance as an OnDoubleClickListener should inherit
- * this class and implement virtual methods. See Examples for more details.
+ * this class and implement virtual functions. See Examples for more details.
  */
 class IOnDoubleClickListener {
 public:
@@ -38,7 +38,7 @@ public:
     virtual ~IOnDoubleClickListener() = default;
 
     /**
-     * Callback method to be called when a double-click event occurs.
+     * Callback function to be called when a double-click event occurs.
      * @param button is a reference to the instance which called the listener.
      */
     virtual void onDoubleClick(ObjectButton &button) = 0;

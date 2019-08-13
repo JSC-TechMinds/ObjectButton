@@ -6,7 +6,7 @@
 ObjectButton is an Arduino library for detecting common button actions. Because of it, you can map different functions into a single button, i.e. turn on the light on a button click and play an alarm sound on double-click.
 
 ## Rationale
-This library was inspired by an existing Arduino library, [OneButton][OneButton]. It allows you to attach a callback function to a specific action. This callback function is basically a pointer to a function. Following approach works great for C-like functions, but not for [C++ methods inside objects][so-object-member]. Also, if your function gets called, it has no idea, which button called it.
+This library was inspired by an existing Arduino library, [OneButton][OneButton]. It allows you to attach a callback function to a specific action. This callback function is basically a pointer to a function. Following approach works great for C-like functions, but not for [C++ object member functions][so-object-member]. Also, if your function gets called, it has no idea, which button called it.
 
 To sum up:
 - Only C-like functions can be called back
@@ -14,7 +14,7 @@ To sum up:
 - If you have more buttons, neccesity to map actions to different functions
 
 ### Listeners
-Approach used in this library was inspired by [Android][android-listener]. Instead of passing a function callback, you'll implement listeners inside your class and pass a reference to your object. Our library can call all the methods defined in the listener, no need to pass callbacks to individual methods anymore! Also, each callback method has one input parameter - a reference to `ObjectButton` instance. This way we can differentiate, which button produced an event and have code for all the buttons in one place.
+Approach used in this library was inspired by [Android][android-listener]. Instead of passing a function callback, you'll implement listeners inside your class and pass a reference to your object. Our library can call all the functions defined in the listener, no need to pass callbacks to individual functions anymore! Also, each callback function has one input parameter - a reference to `ObjectButton` instance. This way we can differentiate, which button produced an event and have code for all the buttons in one place.
 
 Supported listeners:
 - [IOnClickListener](src/interfaces/IOnClickListener.h)
@@ -33,7 +33,7 @@ At the moment, following actions are detected:
 - Button release after a long press
 
 ### Tweaking action recognition
-This library comes with reasonable defaults for detecting all the actions. However, you can tweak the values to better fit your project. First, create a new `ObjectButton` instance. Then, call one of these methods:
+This library comes with reasonable defaults for detecting all the actions. However, you can tweak the values to better fit your project. First, create a new `ObjectButton` instance. Then, call one of these functions:
 - `setDebounceTicks()` to adjust the debounce interval for more reliable pattern recognition
 - `setClickTicks()` to adjust the time to detect a click action
 - `setLongPressTicks()` to adjust the time to detect a long press action

@@ -40,7 +40,7 @@ ObjectButton::ObjectButton(uint8_t pin, bool activeLow) {
  * @brief Get button identifier.
  *
  * Each ObjectButton has its own identification. This allows us to receive events from multiple buttons
- * in one common method and based on button ID do different actions. Button ID corresponds to input
+ * in one common function and based on button ID do different actions. Button ID corresponds to input
  * pin number.
  *
  * @return button ID as an integer.
@@ -178,7 +178,7 @@ bool ObjectButton::isLongPressed() {
 /**
  * @brief Reset button state.
  *
- * This method resets internal state machine and all the flags to their default values.
+ * This function resets internal state machine and all the flags to their default values.
  * If you set custom debounce, click or long press intervals, these will also be reset to their
  * default values.
  */
@@ -197,7 +197,7 @@ void ObjectButton::reset() {
 /**
  * @brief Update internal state machine.
  *
- * This method is responsible for updating internal state machine
+ * This function is responsible for updating internal state machine
  * responsible for handling button events and should be called periodically
  * in your <code>loop()</code> function.
  */

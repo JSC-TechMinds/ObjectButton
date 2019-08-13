@@ -28,7 +28,7 @@ class ObjectButton;
  * @brief Callback interface for click events.
  *
  * Each object passed to ObjectButton instance as an OnClickListener should inherit
- * this class and implement virtual methods. See Examples for more details.
+ * this class and implement virtual functions. See Examples for more details.
  */
 class IOnClickListener {
 public:
@@ -38,7 +38,7 @@ public:
     virtual ~IOnClickListener() = default;
 
     /**
-     * Callback method to be called when a click event occurs.
+     * Callback function to be called when a click event occurs.
      * @param button is a reference to the instance which called the listener.
      */
     virtual void onClick(ObjectButton &button) = 0;

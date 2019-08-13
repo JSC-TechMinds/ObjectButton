@@ -51,7 +51,7 @@ public:
      *
      * Getting a reference to the internal button allows us to have full control
      * over behavior, which is very important in a test. With this approach we do not need to create
-     * custom methods, which call button methods. Instead we call button methods directly.
+     * custom functions, which pass call to button functions. Instead we call button functions directly.
      * @return a reference to internal button instance inside the mock.
      */
     ObjectButton &getButton();

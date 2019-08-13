@@ -28,7 +28,7 @@ class ObjectButton;
 * @brief Callback interface for button press/release events.
 *
 * Each object passed to ObjectButton instance as an OnPressListener should inherit
-* this class and implement virtual methods. See Examples for more details.
+* this class and implement virtual functions. See Examples for more details.
 */
 class IOnPressListener {
 public:
@@ -38,25 +38,25 @@ public:
     virtual ~IOnPressListener() = default;
 
     /**
-     * Callback method to be called when a button is pressed.
+     * Callback function to be called when a button is pressed.
      * @param button is a reference to the instance which called the listener.
      */
     virtual void onPress(ObjectButton &button) = 0;
 
     /**
-     * Callback method to be called when a button is released.
+     * Callback function to be called when a button is released.
      * @param button is a reference to the instance which called the listener.
      */
     virtual void onRelease(ObjectButton &button) = 0;
 
     /**
-     * Callback method to be called when button long press started.
+     * Callback function to be called when button long press started.
      * @param button is a reference to the instance which called the listener.
      */
     virtual void onLongPressStart(ObjectButton &button) = 0;
 
     /**
-     * Callback method to be called when button long press ended.
+     * Callback function to be called when button long press ended.
      * @param button is a reference to the instance which called the listener.
      */
     virtual void onLongPressEnd(ObjectButton &button) = 0;

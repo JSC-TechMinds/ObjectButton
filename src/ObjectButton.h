@@ -109,7 +109,7 @@ private:
 
     /*
      * Following variables are used to define time constraints necessary to properly detect events.
-     * These values can be overridden using dedicated methods.
+     * These values can be overridden using dedicated functions.
      */
     uint8_t m_debounceTicks = DEFAULT_DEBOUNCE_TICKS_MS; /**< Sets debounce time to default [milliseconds] */
     uint16_t m_clickTicks = DEFAULT_CLICK_TICKS_MS; /**< Sets time to detect click event to default [milliseconds] */
@@ -135,7 +135,7 @@ private:
 
     /**
      * This flag helps us determine if an <code>onPress</code> event was already sent. It is necessary
-     * to avoid sending this event each time our state machine's <code>tick()</code> method is called.
+     * to avoid sending this event each time our state machine's <code>tick()</code> function is called.
      *
      * @see tick()
      */
