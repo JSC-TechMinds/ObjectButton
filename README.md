@@ -56,7 +56,7 @@ Please read [contributing rules](CONTRIBUTING.md) for more details.
 
 Copyright (c) JSC electronics. All rights reserved.
 
-Licensed under the [Apache-2.0](LICENSE.md) license.
+Licensed under the [Apache-2.0](LICENSE) license.
 
 [//]: # (Used references)
 [OneButton]: https://github.com/mathertel/OneButton
