@@ -2,6 +2,7 @@
 [![Build Status](https://travis-ci.com/JSC-electronics/ObjectButton.svg?branch=master)](https://travis-ci.com/JSC-electronics/ObjectButton)
 [![GitHub release](https://img.shields.io/github/release/JSC-electronics/ObjectButton.svg?maxAge=3600)](https://github.com/JSC-electronics/ObjectButton/releases)
 [![License: Apache 2.0](https://img.shields.io/badge/license-Apache--2.0-green.svg)](https://github.com/JSC-electronics/ObjectButton/blob/master/LICENSE)
+[![Donate](https://img.shields.io/badge/donate-PayPal-blueviolet.svg)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=SESX9ABM7V8KA&source=url)
 
 ObjectButton is an Arduino library for detecting common button actions. Because of it, you can map different functions into a single button, i.e. turn on the light on a button click and play an alarm sound on double-click.
 
@@ -57,6 +58,12 @@ Please read [contributing rules](CONTRIBUTING.md) for more details.
 Copyright (c) JSC electronics. All rights reserved.
 
 Licensed under the [Apache-2.0](LICENSE) license.
+
+## Support
+
+We hope our library helped to speed up your project development. You can support our effort to convert coffe and pizza into a code with a small donation. Any support is much appreciated.
+
+[![paypal](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=SESX9ABM7V8KA&source=url)
 
 [//]: # (Used references)
 [OneButton]: https://github.com/mathertel/OneButton
