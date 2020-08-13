@@ -1,11 +1,20 @@
 {
   "name": "ObjectButton",
+  "version": "1.0.0",
   "keywords": "arduino, button, pushbutton",
   "description": "ObjectButton is an Arduino library for detecting common button actions. Because of it, you can map different functions into a single button, i.e. turn on the light on a button click and play an alarm sound on double-click.",
+  "license": "Apache-2.0",
   "repository":
   {
     "type": "git",
     "url": "https://github.com/JSC-electronics/ObjectButton"
+  },
+  "authors":
+  {
+      "name": "Vladimír Záhradník",
+      "email": "vladimir.zahradnik@jsce.cz",
+      "url": "https://github.com/vzahradnik",
+      "maintainer": true
   },
   "frameworks": "arduino",
   "platforms": "*"
