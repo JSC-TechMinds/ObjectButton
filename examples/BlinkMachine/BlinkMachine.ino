@@ -11,7 +11,7 @@
  *
  * See their sketch for more details on internal workings, if it's not clear for your from this code.
  *
- * Copyright 2019 JSC electronics
+ * Copyright 2019-2020 JSC electronics
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -27,8 +27,7 @@
  */
 
 #include <ObjectButton.h>
-#include <interfaces/IOnClickListener.h>
-#include <interfaces/IOnDoubleClickListener.h>
+using namespace jsc;
 
 constexpr static byte INPUT_PIN = A1;
 constexpr static byte LED_PIN = LED_BUILTIN;
@@ -43,9 +42,9 @@ public:
     void update();
 
 private:
-    void onClick(ObjectButton &button) override;
+    void onClick(Button& button) override;
 
-    void onDoubleClick(ObjectButton &button) override;
+    void onDoubleClick(Button& button) override;
 
     enum class Action {
         ACTION_OFF,
@@ -55,10 +54,10 @@ private:
     };
 
     Action m_nextAction = Action::ACTION_OFF;
-    ObjectButton button = ObjectButton(INPUT_PIN, /* activeLow */ true);
+    DigitalButton button = DigitalButton(INPUT_PIN, /* inputPullup */ true);
 };
 
-void BlinkMachine::onClick(ObjectButton &button) {
+void BlinkMachine::onClick(Button& button) {
     if (button.getId() == INPUT_PIN) {
         Serial.println("Button clicked!");
         m_nextAction = m_nextAction == Action::ACTION_OFF ?
@@ -66,7 +65,7 @@ void BlinkMachine::onClick(ObjectButton &button) {
     }
 }
 
-void BlinkMachine::onDoubleClick(ObjectButton &button) {
+void BlinkMachine::onDoubleClick(Button& button) {
     if (button.getId() == INPUT_PIN) {
         Serial.println("Button double-clicked!");
 

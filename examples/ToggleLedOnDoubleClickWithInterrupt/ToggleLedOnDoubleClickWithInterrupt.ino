@@ -1,13 +1,13 @@
 /**
- * @brief Single button, double click with interrupt example.
+ * @brief Single digital button, double click with interrupt example.
  *
- * This sketch demonstrates using ObjectButton library with single button,
+ * This sketch demonstrates using ObjectButton library with single digital button,
  * which will turn built-in LED on or off after being double-clicked.
  *
  * This example is almost identical to ToggleLedOnDoubleClick.ino, except
  * button state refresh is bound to interrupt.
  *
- * Copyright 2019 JSC electronics
+ * Copyright 2019-2020 JSC electronics
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,7 +23,7 @@
  */
 
 #include <ObjectButton.h>
-#include <interfaces/IOnDoubleClickListener.h>
+using namespace jsc;
 
 constexpr static byte INTERRUPT_PIN = 2;
 constexpr static byte LED_PIN = LED_BUILTIN;
@@ -37,13 +37,13 @@ public:
     void update();
 
 private:
-    void onDoubleClick(ObjectButton &button) override;
+    void onDoubleClick(Button& button) override;
 
-    ObjectButton button = ObjectButton(INTERRUPT_PIN);
+    DigitalButton button = DigitalButton(INTERRUPT_PIN);
     volatile byte ledState = LOW;
 };
 
-void ToggleLedOnDoubleClick::onDoubleClick(ObjectButton &button) {
+void ToggleLedOnDoubleClick::onDoubleClick(Button& button) {
     if (button.getId() == INTERRUPT_PIN) {
         Serial.println("Button double-clicked!");
 

@@ -21,6 +21,7 @@ setOnDoubleClickListener	KEYWORD2
 setOnPressListener	KEYWORD2
 setDebounceTicks	KEYWORD2
 setClickTicks	KEYWORD2
+setVoltageMargin	KEYWORD2
 setLongPressTicks	KEYWORD2
 isPressed	KEYWORD2
 isLongPressed	KEYWORD2
@@ -31,7 +32,11 @@ tick	KEYWORD2
 # Instances (KEYWORD2)
 #######################################
 
-ObjectButton	KEYWORD2
+Button	KEYWORD2
+AnalogButton	KEYWORD2
+DigitalButton	KEYWORD2
+AnalogSensor	KEYWORD2
+DigitalSensor	KEYWORD2
 
 #######################################
 # Constants (LITERAL1)
@@ -40,3 +45,4 @@ ObjectButton	KEYWORD2
 DEFAULT_DEBOUNCE_TICKS_MS	LITERAL1
 DEFAULT_CLICK_TICKS_MS	LITERAL1
 DEFAULT_LONG_PRESS_TICKS_MS	LITERAL1
+DEFAULT_VOLTAGE_MARGIN	LITERAL1

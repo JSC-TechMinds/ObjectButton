@@ -1,10 +1,10 @@
 /**
- * @brief Single button, click example.
+ * @brief Single digital button, click example.
  *
- * This sketch demonstrates using ObjectButton library with single button,
+ * This sketch demonstrates using ObjectButton library with single digital button,
  * which will turn built-in LED on or off after being clicked.
  *
- * Copyright 2019 JSC electronics
+ * Copyright 2019-2020 JSC electronics
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,7 +20,7 @@
  */
 
 #include <ObjectButton.h>
-#include <interfaces/IOnClickListener.h>
+using namespace jsc;
 
 constexpr static byte INPUT_PIN = A1;
 constexpr static byte LED_PIN = LED_BUILTIN;
@@ -34,13 +34,13 @@ public:
     void update();
 
 private:
-    void onClick(ObjectButton &button) override;
+    void onClick(Button& button) override;
 
-    ObjectButton button = ObjectButton(INPUT_PIN);
+    DigitalButton button = DigitalButton(INPUT_PIN);
     byte ledState = LOW;
 };
 
-void ToggleLedOnClick::onClick(ObjectButton &button) {
+void ToggleLedOnClick::onClick(Button& button) {
     if (button.getId() == INPUT_PIN) {
         Serial.println("Button clicked!");
 

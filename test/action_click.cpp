@@ -1,5 +1,5 @@
 /**
- *  Copyright (c) 2019 JSC electronics
+ *  Copyright (c) 2019-2020 JSC electronics
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,10 +17,12 @@
 #include <ArduinoUnitTests.h>
 #include "../src/ObjectButton.h"
 #include "mocks/ListenerMock.h"
+using namespace jsc;
 
 constexpr static byte INPUT_PIN = 10;
 
-ListenerMock testMock = ListenerMock(INPUT_PIN, true);
+DigitalButton digitalButton = DigitalButton(INPUT_PIN, true);
+ListenerMock testMock = ListenerMock(digitalButton);
 GodmodeState* state = GODMODE();
 
 unittest_setup() {

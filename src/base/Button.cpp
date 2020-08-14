@@ -1,11 +1,11 @@
 /**
- *  @file       ObjectButton.cpp
+ *  @file       Button.cpp
  *  Project     ObjectButton
  *  @brief      An Arduino library for detecting button actions.
  *  @author     Vladimír Záhradník
- *  License     Apache-2.0 - Copyright (c) 2019 JSC electronics
+ *  License     Apache-2.0 - Copyright (c) 2019-2020 JSC electronics
  *
- *  Copyright (c) 2019 JSC electronics
+ *  Copyright (c) 2019-2020 JSC electronics
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,33 +20,17 @@
  * limitations under the License.
  */
 
-#include <Arduino.h>
-#include "ObjectButton.h"
+#include "Button.h"
+using namespace jsc;
 
 /**
  * @brief Constructor for the class.
  * @param pin an input pin to use for the button.
- * @param activeLow determines pin state after button press. Set to <code>true</code> if voltage level
+ * @param inputPullUp determines pin state after button press. Set to <code>true</code> if voltage level
  * on input pin is <code>LOW</code> after button is pressed. Otherwise set to <code>false</code>.
- * This parameter is optional and defaults to <code>true</code>.
  */
-ObjectButton::ObjectButton(uint8_t pin, bool activeLow) {
-    m_pin = pin;
-    m_buttonPressed = activeLow ? LOW : HIGH;
-    pinMode(m_pin, activeLow ? INPUT_PULLUP : INPUT);
-}
-
-/**
- * @brief Get button identifier.
- *
- * Each ObjectButton has its own identification. This allows us to receive events from multiple buttons
- * in one common function and based on button ID do different actions. Button ID corresponds to input
- * pin number.
- *
- * @return button ID as an integer.
- */
-int ObjectButton::getId() {
-    return m_pin;
+Button::Button(uint8_t pin, bool inputPullUp) : m_pin(pin) {
+    pinMode(pin, inputPullUp ? INPUT_PULLUP : INPUT);
 }
 
 /**
@@ -71,7 +55,7 @@ int ObjectButton::getId() {
  * @see IOnPressListener.h
  * @see setDebounceTicks(uint8_t ticks)
  */
-void ObjectButton::setOnClickListener(IOnClickListener *listener) {
+void Button::setOnClickListener(IOnClickListener *listener) {
     m_onClickListener = listener;
 }
 
@@ -88,10 +72,10 @@ void ObjectButton::setOnClickListener(IOnClickListener *listener) {
  * @param listener object implementing IOnDoubleClickListener interface.
  *
  * @see IOnDoubleClickListener.h
- * @see ObjectButton#m_clickTicks
+ * @see Button#m_clickTicks
  * @see setDebounceTicks(uint8_t ticks)
  */
-void ObjectButton::setOnDoubleClickListener(IOnDoubleClickListener *listener) {
+void Button::setOnDoubleClickListener(IOnDoubleClickListener *listener) {
     m_onDoubleClickListener = listener;
 }
 
@@ -111,10 +95,10 @@ void ObjectButton::setOnDoubleClickListener(IOnDoubleClickListener *listener) {
  * @param listener object implementing IOnPressListener interface.
  *
  * @see IOnPressListener.h
- * @see ObjectButton#m_longPressTicks
+ * @see Button#m_longPressTicks
  * @see setDebounceTicks(uint8_t ticks)
  */
-void ObjectButton::setOnPressListener(IOnPressListener *listener) {
+void Button::setOnPressListener(IOnPressListener *listener) {
     m_onPressListener = listener;
 }
 
@@ -128,7 +112,7 @@ void ObjectButton::setOnPressListener(IOnPressListener *listener) {
  *
  * @param ticks a debounce time interval in milliseconds.
  */
-void ObjectButton::setDebounceTicks(uint8_t ticks) {
+void Button::setDebounceTicks(uint8_t ticks) {
     m_debounceTicks = ticks;
 }
 
@@ -140,7 +124,7 @@ void ObjectButton::setDebounceTicks(uint8_t ticks) {
  *
  * @param ticks a click time interval in milliseconds.
  */
-void ObjectButton::setClickTicks(uint16_t ticks) {
+void Button::setClickTicks(uint16_t ticks) {
     m_clickTicks = ticks;
 }
 
@@ -152,7 +136,7 @@ void ObjectButton::setClickTicks(uint16_t ticks) {
  *
  * @param ticks a long press time interval in milliseconds.
  */
-void ObjectButton::setLongPressTicks(uint16_t ticks) {
+void Button::setLongPressTicks(uint16_t ticks) {
     m_longPressTicks = ticks;
 }
 
@@ -160,7 +144,7 @@ void ObjectButton::setLongPressTicks(uint16_t ticks) {
  * @brief Tell the user if the button is pressed at a given moment.
  * @return <code>true</code> is the button is pressed, <code>false</code> otherwise.
  */
-bool ObjectButton::isPressed() {
+bool Button::isPressed() {
     return m_state == State::BUTTON_PRESSED;
 }
 
@@ -171,7 +155,7 @@ bool ObjectButton::isPressed() {
  *
  * @return <code>true</code> is the button is long pressed, <code>false</code> otherwise.
  */
-bool ObjectButton::isLongPressed() {
+bool Button::isLongPressed() {
     return m_state == State::BUTTON_PRESSED && m_isLongButtonPress;
 }
 
@@ -182,7 +166,7 @@ bool ObjectButton::isLongPressed() {
  * If you set custom debounce, click or long press intervals, these will also be reset to their
  * default values.
  */
-void ObjectButton::reset() {
+void Button::reset() {
     m_state = State::BUTTON_NOT_PRESSED;
     m_isLongButtonPress = false;
     m_buttonPressNotified = false;
@@ -201,24 +185,27 @@ void ObjectButton::reset() {
  * responsible for handling button events and should be called periodically
  * in your <code>loop()</code> function.
  */
-void ObjectButton::tick() {
-    // Detect the input information
-    int buttonLevel = digitalRead(m_pin);
+void Button::tick() {
     unsigned long now = millis();
 
-    // Relative time difference between button press and release
+    /**
+     * Relative time difference between button press and release
+     * Note: millis() counter overflows in approx. 50 days. When this happens, m_buttonPressedTime will be set to
+     * near-to-max unsigned long value (high positive number), and our check whether this value is higher than
+     * timeDelta will pass. Such situation will trigger false event.
+     */
     unsigned long timeDelta = now - m_buttonPressedTime;
 
     switch (m_state) {
         case State::BUTTON_NOT_PRESSED: {
-            if (buttonLevel == m_buttonPressed) {
+            if (isButtonPressed()) {
                 m_state = State::BUTTON_PRESSED;
                 m_buttonPressedTime = now;
             }
             break;
         }
         case State::BUTTON_PRESSED: {
-            if (buttonLevel == m_buttonPressed) {
+            if (isButtonPressed()) {
                 if (timeDelta > m_debounceTicks && !m_buttonPressNotified) {
                     m_buttonPressNotified = true;
                     notifyOnButtonPress();
@@ -241,7 +228,7 @@ void ObjectButton::tick() {
             break;
         }
         case State::BUTTON_RELEASED: {
-            if (buttonLevel == m_buttonPressed && (now - m_buttonReleasedTime) > m_debounceTicks) {
+            if (isButtonPressed() && (now - m_buttonReleasedTime) > m_debounceTicks) {
                 m_buttonPressedTime = now;
                 m_state = State::BUTTON_DOUBLE_CLICKED;
             } else if (timeDelta > m_longPressTicks) {
@@ -255,7 +242,7 @@ void ObjectButton::tick() {
             break;
         }
         case State::BUTTON_DOUBLE_CLICKED: {
-            if (buttonLevel != m_buttonPressed && timeDelta > m_debounceTicks) {
+            if (!isButtonPressed() && timeDelta > m_debounceTicks) {
                 m_state = State::BUTTON_NOT_PRESSED;
                 notifyOnDoubleClick();
             }
@@ -267,7 +254,7 @@ void ObjectButton::tick() {
 /**
  * @brief Notify listener on click event.
  */
-void ObjectButton::notifyOnClick() {
+void Button::notifyOnClick() {
     if (m_onClickListener != nullptr)
         m_onClickListener->onClick(*this);
 }
@@ -275,7 +262,7 @@ void ObjectButton::notifyOnClick() {
 /**
  * @brief Notify listener on double-click event.
  */
-void ObjectButton::notifyOnDoubleClick() {
+void Button::notifyOnDoubleClick() {
     if (m_onDoubleClickListener != nullptr)
         m_onDoubleClickListener->onDoubleClick(*this);
 }
@@ -283,7 +270,7 @@ void ObjectButton::notifyOnDoubleClick() {
 /**
  * @brief Notify listener on button press event.
  */
-void ObjectButton::notifyOnButtonPress() {
+void Button::notifyOnButtonPress() {
     if (m_onPressListener != nullptr)
         m_onPressListener->onPress(*this);
 }
@@ -291,7 +278,7 @@ void ObjectButton::notifyOnButtonPress() {
 /**
  * @brief Notify listener on button release event.
  */
-void ObjectButton::notifyOnButtonRelease() {
+void Button::notifyOnButtonRelease() {
     if (m_onPressListener != nullptr)
         m_onPressListener->onRelease(*this);
 }
@@ -299,7 +286,7 @@ void ObjectButton::notifyOnButtonRelease() {
 /**
  * @brief Notify listener on long press start event.
  */
-void ObjectButton::notifyOnLongPressStart() {
+void Button::notifyOnLongPressStart() {
     if (m_onPressListener != nullptr)
         m_onPressListener->onLongPressStart(*this);
 }
@@ -307,7 +294,7 @@ void ObjectButton::notifyOnLongPressStart() {
 /**
  * @brief Notify listener on long press end event.
  */
-void ObjectButton::notifyOnLongPressEnd() {
+void Button::notifyOnLongPressEnd() {
     if (m_onPressListener != nullptr)
         m_onPressListener->onLongPressEnd(*this);
 }

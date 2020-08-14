@@ -33,6 +33,20 @@ At the moment, following actions are detected:
 - Button long press
 - Button release after a long press
 
+## Analog and digital buttons
+At the moment, we suppport both analog and digital buttons:
+- Each digital button needs to be connected to a unique pin
+- You can distinguish digital buttons based on their button ID, which matches pin number
+- Analog buttons can share the same pin. We detect actions based on different voltage levels
+- In order to distinguish analog buttons among themselves, each button requires to set up a button ID as a mandatory parameter. It's an arbitrary number from 0 - 255, and it should be unique. If you use the same button ID on two analog buttons, your code will work, but you won't distinguish, which button triggered an action. At the moment, we don't validate user input. You should know what you're doing.
+
+> Note: Detection of simultaneous press of two analog buttons sharing the same pin is not supported.
+
+## Analog and digital sensors
+Sensors are rebranded buttons; they have exactly the same functionality. While buttons react to click, double-click, and press actions, sensors react to motion or other visual changes.
+
+> Note: While we defined sensor types, listeners stay the same. It means you can hook up onClickListener to a sensor. Maybe we'll think of a more elegant solution in the future.
+
 ### Tweaking action recognition
 This library comes with reasonable defaults for detecting all the actions. However, you can tweak the values to better fit your project. First, create a new `ObjectButton` instance. Then, call one of these functions:
 - `setDebounceTicks()` to adjust the debounce interval for more reliable pattern recognition

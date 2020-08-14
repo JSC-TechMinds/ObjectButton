@@ -4,27 +4,41 @@
  * See the documentation of the main class, ObjectButton, or browse the modules
  * and examples using the sidebar on the left.
  *
- * The latest development version is available on [GitHub](https://github.com/jsc-electronics/ObjectButton).
+ * The latest development version is available on [GitHub](https://github.com/JSC-electronics/ObjectButton).
  */
 
 /**
  * @example ToggleLedOnClick.ino
  *
- * This sketch demonstrates using ObjectButton library with single button,
+ * This sketch demonstrates using ObjectButton library with single digital button,
+ * which will turn built-in LED on or off after being clicked.
+ */
+
+/**
+ * @example AnalogButtonToggleLedOnClick.ino
+ *
+ * This sketch demonstrates using ObjectButton library with single analog button,
+ * which will turn built-in LED on or off after being clicked.
+ */
+
+/**
+ * @example AnalogSensorToggleLedOnDetect.ino
+ *
+ * This sketch demonstrates using ObjectButton library with single analog sensor,
  * which will turn built-in LED on or off after being clicked.
  */
 
 /**
  * @example ToggleLedOnDoubleClick.ino
  *
- * This sketch demonstrates using ObjectButton library with single button,
+ * This sketch demonstrates using ObjectButton library with single digital button,
  * which will turn built-in LED on or off after being double-clicked.
  */
 
 /**
  * @example ToggleLedOnDoubleClickWithInterrupt.ino
  *
- * This sketch demonstrates using ObjectButton library with single button,
+ * This sketch demonstrates using ObjectButton library with single digital button,
  * which will turn built-in LED on or off after being double-clicked.
  *
  * This example is almost identical to ToggleLedOnDoubleClick.ino, except
@@ -34,17 +48,34 @@
 /**
  * @example TurnLedOnLongPress.ino
  *
- * This sketch demonstrates using ObjectButton library with single button,
- * which will turn built-in LED on when it's long pressed.
+ * This sketch demonstrates using ObjectButton library with single digital button,
+ * which will turn built-in LED on when it's long-pressed.
  */
 
 /**
- * @example TwoButtons.ino
+ * @example TwoDigitalButtons.ino
  *
- * This sketch demonstrates using ObjectButton library with two distinct buttons.
+ * This sketch demonstrates using ObjectButton library with two distinct digital buttons.
  *
  * In this example we receive all events produced by buttons and print
  * which event occurred on which button to the serial monitor.
+ */
+
+/**
+ * @example TwoAnalogButtonsOnTheSamePin.ino
+ *
+ * This sketch demonstrates using ObjectButton library with two distinct analog buttons sharing the same pin.
+ *
+ * In this example we receive all events produced by buttons and print
+ * which event occurred on which button to the serial monitor.
+ */
+
+/**
+ * @example TwoAnalogSensorsOnTheSamePin.ino
+ *
+ * This sketch demonstrates using ObjectButton library with two distinct analog sensors sharing the same pin.
+ *
+ * In this example we receive a click event, which simulates motion detection.
  */
 
 /**

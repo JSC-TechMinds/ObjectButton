@@ -1,5 +1,5 @@
 /**
- *  @file       ObjectButton.h
+ *  @file       AnalogSensor.h
  *  Project     ObjectButton
  *  @brief      An Arduino library for detecting button actions.
  *  @author     Vladimír Záhradník
@@ -22,17 +22,19 @@
  * limitations under the License.
  */
 
-#ifndef OBJECT_BUTTON_H
-#define OBJECT_BUTTON_H
+#ifndef ANALOG_SENSOR_H
+#define ANALOG_SENSOR_H
 
-#include "digital/DigitalButton.h"
-#include "digital/DigitalSensor.h"
+#include "AnalogButton.h"
 
-#include "analog/AnalogButton.h"
-#include "analog/AnalogSensor.h"
+namespace jsc {
+    class AnalogSensor : public AnalogButton {
+    public:
+        AnalogSensor(uint8_t sensorId,
+                    uint8_t pin,
+                    uint16_t voltage,
+                    bool inputPullUp = true);
+    };
+}
 
-#include "interfaces/IOnClickListener.h"
-#include "interfaces/IOnDoubleClickListener.h"
-#include "interfaces/IOnPressListener.h"
-
-#endif // OBJECT_BUTTON_H
+#endif // ANALOG_SENSOR_H

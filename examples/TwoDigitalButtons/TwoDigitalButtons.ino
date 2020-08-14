@@ -1,12 +1,12 @@
 /**
- * @brief Two distinct buttons example.
+ * @brief Two distinct digital buttons example.
  *
- * This sketch demonstrates using ObjectButton library with two distinct buttons.
+ * This sketch demonstrates using ObjectButton library with two distinct digital buttons.
  *
  * In this example we receive all events produced by buttons and print
  * which event occurred on which button to the serial monitor.
  *
- * Copyright 2019 JSC electronics
+ * Copyright 2019-2020 JSC electronics
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,9 +22,7 @@
  */
 
 #include <ObjectButton.h>
-#include <interfaces/IOnClickListener.h>
-#include <interfaces/IOnDoubleClickListener.h>
-#include <interfaces/IOnPressListener.h>
+using namespace jsc;
 
 constexpr static byte INPUT_PIN_BUTTON1 = A1;
 constexpr static byte INPUT_PIN_BUTTON2 = A2;
@@ -39,23 +37,23 @@ public:
     void update();
 
 private:
-    void onClick(ObjectButton &button) override;
+    void onClick(Button& button) override;
 
-    void onDoubleClick(ObjectButton &button) override;
+    void onDoubleClick(Button& button) override;
 
-    void onPress(ObjectButton &button) override;
+    void onPress(Button& button) override;
 
-    void onRelease(ObjectButton &button) override;
+    void onRelease(Button& button) override;
 
-    void onLongPressStart(ObjectButton &button) override;
+    void onLongPressStart(Button& button) override;
 
-    void onLongPressEnd(ObjectButton &button) override;
+    void onLongPressEnd(Button& button) override;
 
-    ObjectButton button1 = ObjectButton(INPUT_PIN_BUTTON1);
-    ObjectButton button2 = ObjectButton(INPUT_PIN_BUTTON2);
+    DigitalButton button1 = DigitalButton(INPUT_PIN_BUTTON1);
+    DigitalButton button2 = DigitalButton(INPUT_PIN_BUTTON2);
 };
 
-void TwoButtons::onClick(ObjectButton &button) {
+void TwoButtons::onClick(Button& button) {
     switch (button.getId()) {
         case INPUT_PIN_BUTTON1:
             Serial.println("Button 1 clicked!");
@@ -66,7 +64,7 @@ void TwoButtons::onClick(ObjectButton &button) {
     }
 }
 
-void TwoButtons::onDoubleClick(ObjectButton &button) {
+void TwoButtons::onDoubleClick(Button& button) {
     switch (button.getId()) {
         case INPUT_PIN_BUTTON1:
             Serial.println("Button 1 double-clicked!");
@@ -77,7 +75,7 @@ void TwoButtons::onDoubleClick(ObjectButton &button) {
     }
 }
 
-void TwoButtons::onPress(ObjectButton &button) {
+void TwoButtons::onPress(Button& button) {
     switch (button.getId()) {
         case INPUT_PIN_BUTTON1:
             Serial.println("Button 1 pressed!");
@@ -88,7 +86,7 @@ void TwoButtons::onPress(ObjectButton &button) {
     }
 }
 
-void TwoButtons::onRelease(ObjectButton &button) {
+void TwoButtons::onRelease(Button& button) {
     switch (button.getId()) {
         case INPUT_PIN_BUTTON1:
             Serial.println("Button 1 released!");
@@ -99,7 +97,7 @@ void TwoButtons::onRelease(ObjectButton &button) {
     }
 }
 
-void TwoButtons::onLongPressStart(ObjectButton &button) {
+void TwoButtons::onLongPressStart(Button& button) {
     switch (button.getId()) {
         case INPUT_PIN_BUTTON1:
             Serial.println("Long press started on button 1!");
@@ -110,7 +108,7 @@ void TwoButtons::onLongPressStart(ObjectButton &button) {
     }
 }
 
-void TwoButtons::onLongPressEnd(ObjectButton &button) {
+void TwoButtons::onLongPressEnd(Button& button) {
     switch (button.getId()) {
         case INPUT_PIN_BUTTON1:
             Serial.println("Long press ended on button 1!");

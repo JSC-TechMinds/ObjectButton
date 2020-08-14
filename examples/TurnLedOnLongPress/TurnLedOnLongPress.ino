@@ -1,10 +1,10 @@
 /**
- * @brief Single button, long press example.
+ * @brief Single digital button, long press example.
  *
- * This sketch demonstrates using ObjectButton library with single button,
+ * This sketch demonstrates using ObjectButton library with single digital button,
  * which will turn built-in LED on when it's long pressed.
  *
- * Copyright 2019 JSC electronics
+ * Copyright 2019-2020 JSC electronics
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,7 +20,7 @@
  */
 
 #include <ObjectButton.h>
-#include <interfaces/IOnPressListener.h>
+using namespace jsc;
 
 constexpr static byte INPUT_PIN = A1;
 constexpr static byte LED_PIN = LED_BUILTIN;
@@ -34,25 +34,25 @@ public:
     void update();
 
 private:
-    void onPress(ObjectButton &button) override {};
+    void onPress(Button& button) override {};
 
-    void onRelease(ObjectButton &button) override {};
+    void onRelease(Button& button) override {};
 
-    void onLongPressStart(ObjectButton &button) override;
+    void onLongPressStart(Button& button) override;
 
-    void onLongPressEnd(ObjectButton &button) override;
+    void onLongPressEnd(Button& button) override;
 
-    ObjectButton button = ObjectButton(INPUT_PIN);
+    DigitalButton button = DigitalButton(INPUT_PIN);
 };
 
-void TurnLedOnLongPress::onLongPressStart(ObjectButton &button) {
+void TurnLedOnLongPress::onLongPressStart(Button& button) {
     if (button.getId() == INPUT_PIN) {
         Serial.println("Button long press started, turning LED on!");
         digitalWrite(LED_PIN, HIGH);
     }
 }
 
-void TurnLedOnLongPress::onLongPressEnd(ObjectButton &button) {
+void TurnLedOnLongPress::onLongPressEnd(Button& button) {
     if (button.getId() == INPUT_PIN) {
         Serial.println("Button long press ended, turning LED off!");
         digitalWrite(LED_PIN, LOW);

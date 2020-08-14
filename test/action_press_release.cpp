@@ -17,10 +17,12 @@
 #include <ArduinoUnitTests.h>
 #include "../src/ObjectButton.h"
 #include "mocks/ListenerMock.h"
+using namespace jsc;
 
 constexpr static byte INPUT_PIN = 10;
 
-ListenerMock testMock = ListenerMock(INPUT_PIN, true);
+DigitalButton digitalButton = DigitalButton(INPUT_PIN, true);
+ListenerMock testMock = ListenerMock(digitalButton);
 GodmodeState* state = GODMODE();
 
 unittest_setup() {
@@ -37,7 +39,7 @@ unittest(properly_detect_button_press_in_active_low_mode) {
 }
 
 unittest(properly_detect_button_press_in_active_high_mode) {
-    ObjectButton button = ObjectButton(INPUT_PIN, false);
+    DigitalButton button = DigitalButton(INPUT_PIN, false);
 
     // press button
     state->digitalPin[INPUT_PIN] = HIGH;
