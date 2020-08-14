@@ -5,7 +5,7 @@
  *  @author     Vladimír Záhradník
  *  License     Apache-2.0 - Copyright (c) 2019 JSC electronics
  *
- *  Copyright (c) 2019 JSC electronics
+ *  Copyright (c) 2019-2020 JSC electronics
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,9 +23,7 @@
 #pragma once
 
 #include "../src/ObjectButton.h"
-#include "../src/interfaces/IOnClickListener.h"
-#include "../src/interfaces/IOnDoubleClickListener.h"
-#include "../src/interfaces/IOnPressListener.h"
+using namespace jsc;
 
 /**
  * @brief Helper class used in unit tests.
@@ -40,11 +38,11 @@ public:
     /**
      * Constructor
      * @param inputPin is a pin to which a button is attached. In this case a pin is mocked and controlled by a test.
-     * @param activeLow passes activeLow value to ObjectButton constructor
+     * @param inputPullUp passes inputPullUp value to Button constructor
      *
-     * @see ObjectButton(uint8_t pin, bool activeLow = true)
+     * @see Button(uint8_t pin, bool inputPullUp = true)
      */
-    explicit ListenerMock(int inputPin, bool activeLow);
+    explicit ListenerMock(Button& button);
 
     /**
      * @brief Get reference to button created inside this mock.
@@ -54,7 +52,7 @@ public:
      * custom functions, which pass call to button functions. Instead we call button functions directly.
      * @return a reference to internal button instance inside the mock.
      */
-    ObjectButton &getButton();
+    Button& getButton();
 
     /**
      * @brief Get number of click events which occurred since this mock was reset.
@@ -98,19 +96,19 @@ public:
     void resetState();
 
 private:
-    void onClick(ObjectButton &button) override;
+    void onClick(Button& button) override;
 
-    void onDoubleClick(ObjectButton &button) override;
+    void onDoubleClick(Button& button) override;
 
-    void onPress(ObjectButton &button) override;
+    void onPress(Button& button) override;
 
-    void onRelease(ObjectButton &button) override;
+    void onRelease(Button& button) override;
 
-    void onLongPressStart(ObjectButton &button) override;
+    void onLongPressStart(Button& button) override;
 
-    void onLongPressEnd(ObjectButton &button) override;
+    void onLongPressEnd(Button& button) override;
 
-    ObjectButton m_button;
+    Button& m_button;
     int m_onClickEventsReceived = 0;
     int m_onDoubleClickEventsReceived = 0;
     int m_onPressEventsReceived = 0;
@@ -119,13 +117,13 @@ private:
     int m_onLongPressEndEventsReceived = 0;
 };
 
-ListenerMock::ListenerMock(int inputPin, bool activeLow) : m_button(inputPin, activeLow) {
+ListenerMock::ListenerMock(Button& button) : m_button(button) {
     m_button.setOnClickListener(this);
     m_button.setOnDoubleClickListener(this);
     m_button.setOnPressListener(this);
 }
 
-ObjectButton &ListenerMock::getButton() {
+Button& ListenerMock::getButton() {
     return m_button;
 }
 
@@ -163,26 +161,26 @@ void ListenerMock::resetState() {
     m_onLongPressEndEventsReceived = 0;
 }
 
-void ListenerMock::onClick(ObjectButton &button) {
+void ListenerMock::onClick(Button& button) {
     m_onClickEventsReceived++;
 }
 
-void ListenerMock::onDoubleClick(ObjectButton &button) {
+void ListenerMock::onDoubleClick(Button& button) {
     m_onDoubleClickEventsReceived++;
 }
 
-void ListenerMock::onPress(ObjectButton &button) {
+void ListenerMock::onPress(Button& button) {
     m_onPressEventsReceived++;
 }
 
-void ListenerMock::onRelease(ObjectButton &button) {
+void ListenerMock::onRelease(Button& button) {
     m_onReleaseEventsReceived++;
 }
 
-void ListenerMock::onLongPressStart(ObjectButton &button) {
+void ListenerMock::onLongPressStart(Button& button) {
     m_onLongPressStartEventsReceived++;
 }
 
-void ListenerMock::onLongPressEnd(ObjectButton &button) {
+void ListenerMock::onLongPressEnd(Button& button) {
     m_onLongPressEndEventsReceived++;
 }

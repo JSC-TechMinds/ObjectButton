@@ -1,8 +1,8 @@
 /**
- * @brief Single digital button, double click example.
+ * @brief Single analog sensor, detection (click) example.
  *
- * This sketch demonstrates using ObjectButton library with single digital button,
- * which will turn built-in LED on or off after being double-clicked.
+ * This sketch demonstrates using ObjectButton library with single analog sensor,
+ * which will turn built-in LED on or off after some motion is being detected.
  *
  * Copyright 2019-2020 JSC electronics
  *
@@ -22,53 +22,55 @@
 #include <ObjectButton.h>
 using namespace jsc;
 
+constexpr static byte SENSOR_ID = 1;
 constexpr static byte INPUT_PIN = A1;
+constexpr static int ON_DETECT_VOLTAGE = 1000;
 constexpr static byte LED_PIN = LED_BUILTIN;
 
-class ToggleLedOnDoubleClick : private virtual IOnDoubleClickListener {
+class ToggleLedOnDetect : private virtual IOnClickListener {
 public:
-    ToggleLedOnDoubleClick() = default;
+    ToggleLedOnDetect() = default;
 
     void init();
 
     void update();
 
 private:
-    void onDoubleClick(Button& button) override;
+    void onClick(Button& button) override;
 
-    DigitalButton button = DigitalButton(INPUT_PIN);
+    AnalogSensor sensor = AnalogSensor(SENSOR_ID, INPUT_PIN, ON_DETECT_VOLTAGE);
     byte ledState = LOW;
 };
 
-void ToggleLedOnDoubleClick::onDoubleClick(Button& button) {
-    if (button.getId() == INPUT_PIN) {
-        Serial.println("Button double-clicked!");
+void ToggleLedOnDetect::onClick(Button& button) {
+    if (sensor.getId() == SENSOR_ID) {
+        Serial.println("Sensor detected some movement!");
 
         ledState = !ledState;
         digitalWrite(LED_PIN, ledState);
     }
 }
 
-void ToggleLedOnDoubleClick::init() {
+void ToggleLedOnDetect::init() {
     // Setup the Serial port. See http://arduino.cc/en/Serial/IfSerial
     Serial.begin(9600);
     while (!Serial) { ; // wait for serial port to connect. Needed for Leonardo only
     }
     pinMode(LED_PIN, OUTPUT);
-    button.setDebounceTicks(10);
-    button.setOnDoubleClickListener(this);
+    sensor.setDebounceTicks(10);
+    sensor.setOnClickListener(this);
 }
 
-void ToggleLedOnDoubleClick::update() {
-    button.tick();
+void ToggleLedOnDetect::update() {
+    sensor.tick();
 }
 
-ToggleLedOnDoubleClick toggleLedOnDoubleClick = ToggleLedOnDoubleClick();
+ToggleLedOnDetect toggleLedOnDetect = ToggleLedOnDetect();
 
 void setup() {
-    toggleLedOnDoubleClick.init();
+    toggleLedOnDetect.init();
 }
 
 void loop() {
-    toggleLedOnDoubleClick.update();
+    toggleLedOnDetect.update();
 }

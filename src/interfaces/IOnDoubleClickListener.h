@@ -3,9 +3,9 @@
  *  Project     ObjectButton
  *  @brief      An Arduino library for detecting button actions.
  *  @author     Vladimír Záhradník
- *  License     Apache-2.0 - Copyright (c) 2019 JSC electronics
+ *  License     Apache-2.0 - Copyright (c) 2019-2020 JSC electronics
  *
- *  Copyright (c) 2019 JSC electronics
+ *  Copyright (c) 2019-2020 JSC electronics
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,27 +20,31 @@
  * limitations under the License.
  */
 
-#pragma once
+#ifndef I_ON_DOUBLE_CLICK_LISTENER_H
+#define I_ON_DOUBLE_CLICK_LISTENER_H
 
-class ObjectButton;
-
-/**
- * @brief Callback interface for double-click events.
- *
- * Each object passed to ObjectButton instance as an OnDoubleClickListener should inherit
- * this class and implement virtual functions. See Examples for more details.
- */
-class IOnDoubleClickListener {
-public:
-    /**
-     * Destructor
-     */
-    virtual ~IOnDoubleClickListener() = default;
+namespace jsc {
+    class Button;
 
     /**
-     * Callback function to be called when a double-click event occurs.
-     * @param button is a reference to the instance which called the listener.
+     * @brief Callback interface for double-click events.
+     *
+     * Each object passed to ObjectButton instance as an OnDoubleClickListener should inherit
+     * this class and implement virtual functions. See Examples for more details.
      */
-    virtual void onDoubleClick(ObjectButton &button) = 0;
-};
+    class IOnDoubleClickListener {
+    public:
+        /**
+         * Destructor
+         */
+        virtual ~IOnDoubleClickListener() = default;
 
+        /**
+         * Callback function to be called when a double-click event occurs.
+         * @param button is a reference to the instance which called the listener.
+         */
+        virtual void onDoubleClick(Button& button) = 0;
+    };
+}
+
+#endif // I_ON_DOUBLE_CLICK_LISTENER_H

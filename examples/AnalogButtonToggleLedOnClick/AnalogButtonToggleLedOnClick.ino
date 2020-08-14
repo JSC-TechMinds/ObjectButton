@@ -1,8 +1,8 @@
 /**
- * @brief Single digital button, double click example.
+ * @brief Single analog button, click example.
  *
- * This sketch demonstrates using ObjectButton library with single digital button,
- * which will turn built-in LED on or off after being double-clicked.
+ * This sketch demonstrates using ObjectButton library with single analog button,
+ * which will turn built-in LED on or off after being clicked.
  *
  * Copyright 2019-2020 JSC electronics
  *
@@ -22,53 +22,55 @@
 #include <ObjectButton.h>
 using namespace jsc;
 
+constexpr static byte BUTTON_ID = 1;
 constexpr static byte INPUT_PIN = A1;
+constexpr static int ON_PRESS_VOLTAGE = 1000;
 constexpr static byte LED_PIN = LED_BUILTIN;
 
-class ToggleLedOnDoubleClick : private virtual IOnDoubleClickListener {
+class ToggleLedOnClick : private virtual IOnClickListener {
 public:
-    ToggleLedOnDoubleClick() = default;
+    ToggleLedOnClick() = default;
 
     void init();
 
     void update();
 
 private:
-    void onDoubleClick(Button& button) override;
+    void onClick(Button& button) override;
 
-    DigitalButton button = DigitalButton(INPUT_PIN);
+    AnalogButton button = AnalogButton(BUTTON_ID, INPUT_PIN, ON_PRESS_VOLTAGE);
     byte ledState = LOW;
 };
 
-void ToggleLedOnDoubleClick::onDoubleClick(Button& button) {
-    if (button.getId() == INPUT_PIN) {
-        Serial.println("Button double-clicked!");
+void ToggleLedOnClick::onClick(Button& button) {
+    if (button.getId() == BUTTON_ID) {
+        Serial.println("Button clicked!");
 
         ledState = !ledState;
         digitalWrite(LED_PIN, ledState);
     }
 }
 
-void ToggleLedOnDoubleClick::init() {
+void ToggleLedOnClick::init() {
     // Setup the Serial port. See http://arduino.cc/en/Serial/IfSerial
     Serial.begin(9600);
     while (!Serial) { ; // wait for serial port to connect. Needed for Leonardo only
     }
     pinMode(LED_PIN, OUTPUT);
     button.setDebounceTicks(10);
-    button.setOnDoubleClickListener(this);
+    button.setOnClickListener(this);
 }
 
-void ToggleLedOnDoubleClick::update() {
+void ToggleLedOnClick::update() {
     button.tick();
 }
 
-ToggleLedOnDoubleClick toggleLedOnDoubleClick = ToggleLedOnDoubleClick();
+ToggleLedOnClick toggleLedOnClick = ToggleLedOnClick();
 
 void setup() {
-    toggleLedOnDoubleClick.init();
+    toggleLedOnClick.init();
 }
 
 void loop() {
-    toggleLedOnDoubleClick.update();
+    toggleLedOnClick.update();
 }

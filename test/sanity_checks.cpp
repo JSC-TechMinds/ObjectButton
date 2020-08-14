@@ -16,23 +16,33 @@
 
 #include <ArduinoUnitTests.h>
 #include "../src/ObjectButton.h"
+using namespace jsc;
 
-ObjectButton button = ObjectButton(10, /* activeLow */ true);
+DigitalButton digitalButton = DigitalButton(10, /*inputPullUp*/ true);
+AnalogButton analogButton = AnalogButton(/*buttonId*/ 1, 10, /*voltage*/ 1000, /* inputPullUp */ true);
 
-unittest(button_id_matches_input_pin) {
-    assertEqual(10, button.getId());
+unittest(digital_button_id_matches_input_pin) {
+    assertEqual(10, digitalButton.getId());
+    assertEqual(1, analogButton.getId());
 
-    ObjectButton button2 = ObjectButton(1, false);
-    assertEqual(1, button2.getId());
+    DigitalButton digitalButton2 = DigitalButton(1, false);
+    assertEqual(1, digitalButton2.getId());
+
+    AnalogButton analogButton2 = AnalogButton(10, 1, 1000, false);
+    assertEqual(10, analogButton2.getId());
 }
 
 unittest(button_not_pressed) {
-    assertEqual(false, button.isLongPressed());
+    assertEqual(false, digitalButton.isLongPressed());
+    assertEqual(false, analogButton.isLongPressed());
 }
 
 unittest(button_not_pressed_after_reset) {
-    button.reset();
-    assertEqual(false, button.isLongPressed());
+    digitalButton.reset();
+    assertEqual(false, digitalButton.isLongPressed());
+
+	analogButton.reset();
+    assertEqual(false, analogButton.isLongPressed());
 }
 
 unittest_main()

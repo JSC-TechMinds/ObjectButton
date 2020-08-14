@@ -1,5 +1,5 @@
 /**
- *  @file       ObjectButton.h
+ *  @file       DigitalSensor.h
  *  Project     ObjectButton
  *  @brief      An Arduino library for detecting button actions.
  *  @author     Vladimír Záhradník
@@ -22,17 +22,16 @@
  * limitations under the License.
  */
 
-#ifndef OBJECT_BUTTON_H
-#define OBJECT_BUTTON_H
+#ifndef DIGITAL_SENSOR_H
+#define DIGITAL_SENSOR_H
 
-#include "digital/DigitalButton.h"
-#include "digital/DigitalSensor.h"
+#include "DigitalButton.h"
 
-#include "analog/AnalogButton.h"
-#include "analog/AnalogSensor.h"
+namespace jsc {
+    class DigitalSensor : public DigitalButton {
+    public:
+        DigitalSensor(uint8_t pin, bool inputPullUp = true);
+    };
+}
 
-#include "interfaces/IOnClickListener.h"
-#include "interfaces/IOnDoubleClickListener.h"
-#include "interfaces/IOnPressListener.h"
-
-#endif // OBJECT_BUTTON_H
+#endif // DIGITAL_SENSOR_H

@@ -1,11 +1,9 @@
 /**
- *  @file       ObjectButton.h
+ *  @file       AnalogSensor.cpp
  *  Project     ObjectButton
  *  @brief      An Arduino library for detecting button actions.
  *  @author     Vladimír Záhradník
  *  License     Apache-2.0 - Copyright (c) 2019-2020 JSC electronics
- *
- *  @section License
  *
  *  Copyright (c) 2019-2020 JSC electronics
  *
@@ -22,17 +20,19 @@
  * limitations under the License.
  */
 
-#ifndef OBJECT_BUTTON_H
-#define OBJECT_BUTTON_H
+#include "AnalogSensor.h"
+using namespace jsc;
 
-#include "digital/DigitalButton.h"
-#include "digital/DigitalSensor.h"
-
-#include "analog/AnalogButton.h"
-#include "analog/AnalogSensor.h"
-
-#include "interfaces/IOnClickListener.h"
-#include "interfaces/IOnDoubleClickListener.h"
-#include "interfaces/IOnPressListener.h"
-
-#endif // OBJECT_BUTTON_H
+/**
+ * @brief Constructor for the class.
+ * @param sensorId a unique button ID. Accepted values: 0 - 255.
+ * @param pin an input pin to use for the button.
+ * @param voltage a voltage returned by the analogRead() function.
+ * @param inputPullUp determines pin state after button press. Set to <code>true</code> if voltage level
+ * on input pin is <code>LOW</code> after button is pressed. Otherwise set to <code>false</code>.
+ * This parameter is optional and defaults to <code>true</code>.
+ */
+AnalogSensor::AnalogSensor(uint8_t sensorId,
+                           uint8_t pin,
+                           uint16_t voltage,
+                           bool inputPullUp) : AnalogButton(sensorId, pin, voltage, inputPullUp) {}

@@ -3,9 +3,9 @@
  *  Project     ObjectButton
  *  @brief      An Arduino library for detecting button actions.
  *  @author     Vladimír Záhradník
- *  License     Apache-2.0 - Copyright (c) 2019 JSC electronics
+ *  License     Apache-2.0 - Copyright (c) 2019-2020 JSC electronics
  *
- *  Copyright (c) 2019 JSC electronics
+ *  Copyright (c) 2019-2020 JSC electronics
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,45 +20,49 @@
  * limitations under the License.
  */
 
-#pragma once
+#ifndef I_ON_PRESS_LISTENER_H
+#define I_ON_PRESS_LISTENER_H
 
-class ObjectButton;
-
-/**
-* @brief Callback interface for button press/release events.
-*
-* Each object passed to ObjectButton instance as an OnPressListener should inherit
-* this class and implement virtual functions. See Examples for more details.
-*/
-class IOnPressListener {
-public:
-    /**
-     * Destructor
-     */
-    virtual ~IOnPressListener() = default;
+namespace jsc {
+    class Button;
 
     /**
-     * Callback function to be called when a button is pressed.
-     * @param button is a reference to the instance which called the listener.
-     */
-    virtual void onPress(ObjectButton &button) = 0;
+    * @brief Callback interface for button press/release events.
+    *
+    * Each object passed to ObjectButton instance as an OnPressListener should inherit
+    * this class and implement virtual functions. See Examples for more details.
+    */
+    class IOnPressListener {
+    public:
+        /**
+         * Destructor
+         */
+        virtual ~IOnPressListener() = default;
 
-    /**
-     * Callback function to be called when a button is released.
-     * @param button is a reference to the instance which called the listener.
-     */
-    virtual void onRelease(ObjectButton &button) = 0;
+        /**
+         * Callback function to be called when a button is pressed.
+         * @param button is a reference to the instance which called the listener.
+         */
+        virtual void onPress(Button& button) = 0;
 
-    /**
-     * Callback function to be called when button long press started.
-     * @param button is a reference to the instance which called the listener.
-     */
-    virtual void onLongPressStart(ObjectButton &button) = 0;
+        /**
+         * Callback function to be called when a button is released.
+         * @param button is a reference to the instance which called the listener.
+         */
+        virtual void onRelease(Button& button) = 0;
 
-    /**
-     * Callback function to be called when button long press ended.
-     * @param button is a reference to the instance which called the listener.
-     */
-    virtual void onLongPressEnd(ObjectButton &button) = 0;
-};
+        /**
+         * Callback function to be called when button long press started.
+         * @param button is a reference to the instance which called the listener.
+         */
+        virtual void onLongPressStart(Button& button) = 0;
 
+        /**
+         * Callback function to be called when button long press ended.
+         * @param button is a reference to the instance which called the listener.
+         */
+        virtual void onLongPressEnd(Button& button) = 0;
+    };
+}
+
+#endif // I_ON_PRESS_LISTENER_H

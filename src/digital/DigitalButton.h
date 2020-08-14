@@ -1,5 +1,5 @@
 /**
- *  @file       ObjectButton.h
+ *  @file       DigitalButton.h
  *  Project     ObjectButton
  *  @brief      An Arduino library for detecting button actions.
  *  @author     Vladimír Záhradník
@@ -22,17 +22,30 @@
  * limitations under the License.
  */
 
-#ifndef OBJECT_BUTTON_H
-#define OBJECT_BUTTON_H
+#ifndef DIGITAL_BUTTON_H
+#define DIGITAL_BUTTON_H
 
-#include "digital/DigitalButton.h"
-#include "digital/DigitalSensor.h"
+#include "../base/Button.h"
 
-#include "analog/AnalogButton.h"
-#include "analog/AnalogSensor.h"
+namespace jsc {
+    class DigitalButton : public Button {
+    public:
+        DigitalButton(uint8_t pin, bool inputPullUp = true);
 
-#include "interfaces/IOnClickListener.h"
-#include "interfaces/IOnDoubleClickListener.h"
-#include "interfaces/IOnPressListener.h"
+        int getId() override;
 
-#endif // OBJECT_BUTTON_H
+    private:
+        bool isButtonPressed() override;
+
+        /**
+         * Signal levels as read from <code>digitalRead()</code> function, can be either <code>HIGH</code> or
+         * <code>LOW</code>. When you create a new button instance, you specify <code>inputPullUp</code> boolean parameter.
+         * This variable represents a mapping from the boolean to actual value expected on input pin.
+         *
+         * @see DigitalButton(uint8_t pin, bool inputPullUp)
+         */
+        byte m_buttonPressed;
+    };
+}
+
+#endif // DIGITAL_BUTTON_H
