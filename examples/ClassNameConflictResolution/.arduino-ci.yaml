@@ -1,0 +1,11 @@
+compile:
+  libraries:
+    - M5Stack
+  platforms:
+    - esp32
+
+unittest:
+  libraries:
+    - M5Stack
+  platforms:
+    - esp32

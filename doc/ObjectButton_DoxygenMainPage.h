@@ -92,3 +92,16 @@
  *
  * See their sketch for more details on internal workings, if it's not clear for your from this code.
  */
+
+/**
+ * @example ClassNameConflictResolution.ino
+ * 
+ * By default, all classes in C++ are in global namespace. It means that
+ * each class name has to be unique inside your projects. Otherwise, you'll
+ * have linker issues, when you include header files from two libraries,
+ * which define classes with the same name.
+ * 
+ * In this example, we'll show you how to deal with naming collision
+ * issues using M5stack library and ObjectButton library, where both
+ * define a class called Button.
+ */

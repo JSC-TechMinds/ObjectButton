@@ -37,6 +37,7 @@ AnalogButton	KEYWORD2
 DigitalButton	KEYWORD2
 AnalogSensor	KEYWORD2
 DigitalSensor	KEYWORD2
+ObjectButton    KEYWORD2
 
 #######################################
 # Constants (LITERAL1)
