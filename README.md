@@ -1,7 +1,9 @@
 # ObjectButton
-[![Build Status](https://travis-ci.com/JSC-electronics/ObjectButton.svg?branch=master)](https://travis-ci.com/JSC-electronics/ObjectButton)
-[![GitHub release](https://img.shields.io/github/release/JSC-electronics/ObjectButton.svg?maxAge=3600)](https://github.com/JSC-electronics/ObjectButton/releases)
+[![Arduino_CI](https://github.com/JSC-electronics/ObjectButton/actions/workflows/arduino_ci.yml/badge.svg)](https://github.com/JSC-electronics/ObjectButton/actions/workflows/arduino_ci.yml)
+[![Documentation](https://github.com/JSC-electronics/ObjectButton/actions/workflows/doxygen.yml/badge.svg)](https://github.com/JSC-electronics/ObjectButton/actions/workflows/doxygen.yml)
 [![License: Apache 2.0](https://img.shields.io/badge/license-Apache--2.0-green.svg)](https://github.com/JSC-electronics/ObjectButton/blob/master/LICENSE)
+[![GitHub release](https://img.shields.io/github/release/JSC-electronics/ObjectButton.svg?maxAge=3600)](https://github.com/JSC-electronics/ObjectButton/releases)
+[![JSC electronics](https://img.shields.io/badge/JSC-electronics-green.svg)](https://www.jsce.cz/)
 [![Donate](https://img.shields.io/badge/donate-PayPal-blueviolet.svg)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=SESX9ABM7V8KA&source=url)
 
 ObjectButton is an Arduino library for detecting common button actions. Because of it, you can map different functions into a single button, i.e. turn on the light on a button click and play an alarm sound on double-click.
