@@ -1,8 +1,6 @@
 var classjsc_1_1Button =
 [
-    [ "~Button", "classjsc_1_1Button.html#a7b3b2967a84a2053895d5fc289054f1a", null ],
     [ "Button", "classjsc_1_1Button.html#a9f4fa3fefe7d97da6705f4bd5770b4e0", null ],
-    [ "getId", "classjsc_1_1Button.html#ae08012a398fb3a873d835a6dfcd5d221", null ],
     [ "isLongPressed", "classjsc_1_1Button.html#a6e362bebd230faea26467fdba2cd555d", null ],
     [ "isPressed", "classjsc_1_1Button.html#a143f0a274b03d2bede8a84e37cd43dc7", null ],
     [ "reset", "classjsc_1_1Button.html#ae34e8f3c482654e8585360fd639d02e3", null ],
