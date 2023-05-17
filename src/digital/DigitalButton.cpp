@@ -48,6 +48,29 @@ int DigitalButton::getId() {
 }
 
 /**
+ * @brief Invert input logic.
+ * 
+ * This function allows the user to dynamically change the logic while the program is running.
+ * Inverted logic means that if the input voltage level is high (e.g. 5 V DC), it will be treated as logic 0. 
+ * Therefore, a low voltage level (0 V DC) will be represented as log 1.
+ */
+void invertInputLogic() {
+    m_buttonPressed = LOW ? HIGH : LOW;    
+}
+
+/**
+ * @brief Check if input logic is inverted.
+ *
+ * Inverted logic means that if the input voltage level is high (e.g. 5 V DC), it will be treated as logic 0. 
+ * Therefore, a low voltage level (0 V DC) will be represented as log 1.
+ *
+ * @return True if logic is inverted.
+ */
+bool isInputLogicInverted() {
+    if ( m_buttonPressed = LOW ) return true;
+    else return false;
+}
+/**
  * @brief Evaluate wheter a button is pressed.
  * 
  * This is a private method called from the state machine. It evaluates whether a button is pressed.

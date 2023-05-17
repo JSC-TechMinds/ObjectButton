@@ -34,6 +34,10 @@ namespace jsc {
 
         int getId() override;
 
+        bool isInputLogicInverted();
+
+        void invertInputLogic();
+
     private:
         bool isButtonPressed() override;
 
