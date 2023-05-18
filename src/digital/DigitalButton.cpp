@@ -67,8 +67,8 @@ void DigitalButton::invertInputLogic() {
  * @return True if logic is inverted.
  */
 bool DigitalButton::isInputLogicInverted() {
-    if ( m_buttonPressed = LOW ) {return true};
-    else {return false};
+    if ( m_buttonPressed = LOW ) {return true;}
+    else {return false;}
 }
 /**
  * @brief Evaluate wheter a button is pressed.
