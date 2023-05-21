@@ -55,7 +55,7 @@ int DigitalButton::getId() {
  * Therefore, a low voltage level (0 V DC) will be represented as log 1.
  */
 void DigitalButton::invertInputLogic() {
-    m_buttonPressed = LOW ? HIGH : LOW;    
+    m_buttonPressed = (m_buttonPressed == LOW) ? HIGH : LOW;
 }
 
 /**
@@ -67,8 +67,7 @@ void DigitalButton::invertInputLogic() {
  * @return True if logic is inverted.
  */
 bool DigitalButton::isInputLogicInverted() {
-    if ( m_buttonPressed = LOW ) {return true;}
-    else {return false;}
+    return (m_buttonPressed == LOW);
 }
 /**
  * @brief Evaluate wheter a button is pressed.
@@ -76,5 +75,5 @@ bool DigitalButton::isInputLogicInverted() {
  * This is a private method called from the state machine. It evaluates whether a button is pressed.
  */
 bool DigitalButton::isButtonPressed() {
-    return digitalRead(m_pin) == m_buttonPressed;
+    return (digitalRead(m_pin) == m_buttonPressed);
 }

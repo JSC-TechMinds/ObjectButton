@@ -1,11 +1,17 @@
 /**
- * @brief Two distinct digital buttons example.
+ * @brief Invert input logic of two DigitalButtons. 
  *
- * This sketch demonstrates using ObjectButton library with two distinct digital buttons.
+ * This sketch demonstrates ObjectButton library with the option to invert input logic. 
+ * Logical 1 will be considered as logical 0 and vice versa.
+ * 
+ * By default, the user can invert the logic when creating an DigitalButton instance using 
+ * the second parameter in the constructor:
+ * - DigitalButton(INPUT_PIN, true) or
+ * - DigitalButton(INPUT_PIN, false) 
  *
- * In this example we receive all events produced by buttons and print
- * which event occurred on which button to the serial monitor.
- *
+ * In this example, however, the input logic can be also inverted during program execution.
+ * A long press of button 1 (INPUT_PIN_BUTTON1) inverts the logic of button 2 (INPUT_PIN_BUTTON2).
+ * 
  * ObjectButton library: https://github.com/JSC-electronics/ObjectButton
  * 
  * Copyright © JSC electronics
@@ -51,8 +57,8 @@ private:
 
     void onLongPressEnd(Button& button) override;
 
-    DigitalButton button1 = DigitalButton(INPUT_PIN_BUTTON1);
-    DigitalButton button2 = DigitalButton(INPUT_PIN_BUTTON2);
+    DigitalButton button1 = DigitalButton(INPUT_PIN_BUTTON1, true /* optional, logic inverted if true */);
+    DigitalButton button2 = DigitalButton(INPUT_PIN_BUTTON2, true /* optional, logic inverted if true */);
 };
 
 void TwoButtons::onClick(Button& button) {
@@ -103,6 +109,12 @@ void TwoButtons::onLongPressStart(Button& button) {
     switch (button.getId()) {
         case INPUT_PIN_BUTTON1:
             Serial.println("Long press started on button 1!");
+            button2.invertInputLogic();
+            if (button2.isInputLogicInverted()) {
+              Serial.println("Input logic is inverted.");
+            } else {
+              Serial.println("Input logic is NOT inverted.");
+            }
             break;
         case INPUT_PIN_BUTTON2:
             Serial.println("Long press started on button 2!");
@@ -128,15 +140,18 @@ void TwoButtons::init() {
     }
     Serial.println("Starting TwoButtons...");
 
-    button1.setDebounceTicks(10);
+    button1.setDebounceTicks(100);
     button1.setOnClickListener(this);
     button1.setOnDoubleClickListener(this);
     button1.setOnPressListener(this);
+    button1.setLongPressTicks(3000 /* ms */);
 
-    button2.setDebounceTicks(10);
+    button2.setDebounceTicks(100);
     button2.setOnClickListener(this);
     button2.setOnDoubleClickListener(this);
     button2.setOnPressListener(this);
+    button2.setLongPressTicks(3000 /* ms */);
+
 }
 
 void TwoButtons::update() {

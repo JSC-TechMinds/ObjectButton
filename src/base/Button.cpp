@@ -136,7 +136,7 @@ void Button::setClickTicks(uint16_t ticks) {
  *
  * @param ticks a long press time interval in milliseconds.
  */
-void Button::setLongPressTicks(uint16_t ticks) {
+void Button::setLongPressTicks(uint16_t ticks /* ms */) {
     m_longPressTicks = ticks;
 }
 
