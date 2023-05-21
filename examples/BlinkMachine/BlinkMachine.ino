@@ -11,7 +11,9 @@
  *
  * See their sketch for more details on internal workings, if it's not clear for your from this code.
  *
- * Copyright 2019-2020 JSC electronics
+ * ObjectButton library: https://github.com/JSC-electronics/ObjectButton
+ * 
+ * Copyright © JSC electronics
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.

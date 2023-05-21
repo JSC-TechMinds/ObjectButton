@@ -33,7 +33,9 @@
  * In this example, we'll show you, how to write your code, when you
  * have class name conflicts.
  * 
- * Copyright 2019-2020 JSC electronics
+ * ObjectButton library: https://github.com/JSC-electronics/ObjectButton
+ * 
+ * Copyright © JSC electronics
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.

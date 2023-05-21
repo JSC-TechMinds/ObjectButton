@@ -7,7 +7,9 @@
  * This example is almost identical to ToggleLedOnDoubleClick.ino, except
  * button state refresh is bound to interrupt.
  *
- * Copyright 2019-2020 JSC electronics
+ * ObjectButton library: https://github.com/JSC-electronics/ObjectButton
+ * 
+ * Copyright © JSC electronics
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
