@@ -1,6 +1,4 @@
 var searchData=
 [
-  ['_7eionclicklistener_0',['~IOnClickListener',['../classjsc_1_1IOnClickListener.html#a8bdc9b05f0f90974395f7a8d7eb82256',1,'jsc::IOnClickListener']]],
-  ['_7eiondoubleclicklistener_1',['~IOnDoubleClickListener',['../classjsc_1_1IOnDoubleClickListener.html#abe869122d0f65f1c8b97935a73598ee3',1,'jsc::IOnDoubleClickListener']]],
-  ['_7eionpresslistener_2',['~IOnPressListener',['../classjsc_1_1IOnPressListener.html#a5b8581fc34c9a8dcd926c00aa45cec8b',1,'jsc::IOnPressListener']]]
+  ['tick_0',['tick',['../classjsc_1_1Button.html#ac9fdcae010e5072366ab0e11ded0ca33',1,'jsc::Button']]]
 ];

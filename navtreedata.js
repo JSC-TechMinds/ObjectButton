@@ -26,7 +26,7 @@ var NAVTREE =
 [
   [ "ObjectButton", "index.html", [
     [ "ObjectButton Arduino Library", "index.html", null ],
-    [ "Contributor Covenant Code of Conduct", "md_CODE_OF_CONDUCT.html", null ],
+    [ "Contributor Covenant Code of Conduct", "md_CODE__OF__CONDUCT.html", null ],
     [ "Contributing Rules", "md_CONTRIBUTING.html", null ],
     [ "Classes", "annotated.html", [
       [ "Class List", "annotated.html", "annotated_dup" ],

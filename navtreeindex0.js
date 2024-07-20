@@ -98,7 +98,7 @@ var NAVTREEINDEX0 =
 "hierarchy.html":[3,2],
 "index.html":[],
 "index.html":[0],
-"md_CODE_OF_CONDUCT.html":[1],
+"md_CODE__OF__CONDUCT.html":[1],
 "md_CONTRIBUTING.html":[2],
 "pages.html":[]
 };
