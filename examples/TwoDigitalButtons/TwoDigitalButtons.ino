@@ -6,9 +6,9 @@
  * In this example we receive all events produced by buttons and print
  * which event occurred on which button to the serial monitor.
  *
- * ObjectButton library: https://github.com/JSC-electronics/ObjectButton
+ * ObjectButton library: https://github.com/JSC-TechMinds/ObjectButton
  * 
- * Copyright © JSC electronics
+ * Copyright © JSC TechMinds
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.

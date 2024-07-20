@@ -1,9 +1,9 @@
 # ObjectButton
-[![Arduino_CI](https://github.com/JSC-electronics/ObjectButton/actions/workflows/arduino_ci.yml/badge.svg)](https://github.com/JSC-electronics/ObjectButton/actions/workflows/arduino_ci.yml)
-[![Documentation](https://github.com/JSC-electronics/ObjectButton/actions/workflows/doxygen.yml/badge.svg)](https://github.com/JSC-electronics/ObjectButton/actions/workflows/doxygen.yml)
-[![License: Apache 2.0](https://img.shields.io/badge/license-Apache--2.0-green.svg)](https://github.com/JSC-electronics/ObjectButton/blob/master/LICENSE)
-[![GitHub release](https://img.shields.io/github/release/JSC-electronics/ObjectButton.svg?maxAge=3600)](https://github.com/JSC-electronics/ObjectButton/releases)
-[![JSC electronics](https://img.shields.io/badge/JSC-electronics-green.svg)](https://www.jsce.cz/)
+[![Arduino_CI](https://github.com/JSC-TechMinds/ObjectButton/actions/workflows/arduino_ci.yml/badge.svg)](https://github.com/JSC-TechMinds/ObjectButton/actions/workflows/arduino_ci.yml)
+[![Documentation](https://github.com/JSC-TechMinds/ObjectButton/actions/workflows/doxygen.yml/badge.svg)](https://github.com/JSC-TechMinds/ObjectButton/actions/workflows/doxygen.yml)
+[![License: Apache 2.0](https://img.shields.io/badge/license-Apache--2.0-green.svg)](https://github.com/JSC-TechMinds/ObjectButton/blob/main/LICENSE)
+[![GitHub release](https://img.shields.io/github/release/JSC-TechMinds/ObjectButton.svg?maxAge=3600)](https://github.com/JSC-TechMinds/ObjectButton/releases)
+[![JSC TechMinds](https://img.shields.io/badge/JSC-TechMinds-green.svg)](https://www.jsctm.cz/)
 [![Donate](https://img.shields.io/badge/donate-PayPal-blueviolet.svg)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=SESX9ABM7V8KA&source=url)
 
 ObjectButton is an Arduino library for detecting common button actions. Because of it, you can map different functions into a single button, i.e. turn on the light on a button click and play an alarm sound on double-click.
@@ -63,15 +63,15 @@ This library comes with reasonable defaults for detecting all the actions. Howev
 ## Contributing
 There are many ways in which you can participate in the project, for example:
 
-* [Submit bugs and feature requests](https://github.com/JSC-electronics/ObjectButton/issues), and help us verify as they are checked in
-* Review [source code changes](https://github.com/JSC-electronics/ObjectButton/pulls)
-* Review the [documentation](https://github.com/JSC-electronics/ObjectButton/wiki) and make pull requests for anything from typos to new content
+* [Submit bugs and feature requests](https://github.com/JSC-TechMinds/ObjectButton/issues), and help us verify as they are checked in
+* Review [source code changes](https://github.com/JSC-TechMinds/ObjectButton/pulls)
+* Review the [documentation](https://github.com/JSC-TechMinds/ObjectButton/wiki) and make pull requests for anything from typos to new content
 
 Please read [contributing rules](CONTRIBUTING.md) for more details.
 
 ## License
 
-Copyright (c) JSC electronics. All rights reserved.
+Copyright (c) JSC TechMinds. All rights reserved.
 
 Licensed under the [Apache-2.0](LICENSE) license.
 
@@ -85,5 +85,5 @@ We hope our library helped to speed up your project development. You can support
 [OneButton]: https://github.com/mathertel/OneButton
 [so-object-member]: https://stackoverflow.com/questions/8865766/get-a-pointer-to-objects-member-function
 [android-listener]: https://developer.android.com/reference/android/view/View.OnClickListener
-[object-button-wiki]: https://github.com/JSC-electronics/ObjectButton/wiki
-[object-button-doxygen]: https://jsc-electronics.github.io/ObjectButton
+[object-button-wiki]: https://github.com/JSC-TechMinds/ObjectButton/wiki
+[object-button-doxygen]: https://JSC-TechMinds.github.io/ObjectButton

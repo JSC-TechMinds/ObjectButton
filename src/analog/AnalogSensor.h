@@ -2,12 +2,12 @@
  *  @file       AnalogSensor.h
  *  Project     ObjectButton
  *  @brief      An Arduino library for detecting button actions.
- *  @author     Vladimír Záhradník
- *  License     Apache-2.0 - Copyright (c) 2019-2020 JSC electronics
+ *  @author     JSC TechMinds
+ *  License     Apache-2.0 - Copyright (c) 2019-2024 JSC TechMinds
  *
  *  @section License
  *
- *  Copyright (c) 2019-2020 JSC electronics
+ *  Copyright (c) 2019-2024 JSC TechMinds
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.

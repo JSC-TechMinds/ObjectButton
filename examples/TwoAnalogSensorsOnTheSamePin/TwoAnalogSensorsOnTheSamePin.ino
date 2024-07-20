@@ -5,9 +5,9 @@
  *
  * In this example we receive onClick() event, which simulates a motion detection.
  *
- * ObjectButton library: https://github.com/JSC-electronics/ObjectButton
+ * ObjectButton library: https://github.com/JSC-TechMinds/ObjectButton
  * 
- * Copyright © JSC electronics
+ * Copyright © JSC TechMinds
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.

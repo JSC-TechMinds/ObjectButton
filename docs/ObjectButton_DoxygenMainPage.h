@@ -4,7 +4,7 @@
  * See the documentation of the main class, ObjectButton, or browse the modules
  * and examples using the sidebar on the left.
  *
- * The latest development version is available on [GitHub](https://github.com/JSC-electronics/ObjectButton).
+ * The latest development version is available on [GitHub](https://github.com/JSC-TechMinds/ObjectButton).
  */
 
 /**
